@@ -24,10 +24,29 @@ h1 {
 }
 /* Define the grid items */
 .grid-item {
+  margin-right: 15px;
   border-radius: 20px;
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) { /* Change to 2 columns on screens smaller than 768px */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) { /* Change to 1 column on screens smaller than 480px */
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 /* Define the image styles */
@@ -64,7 +83,7 @@ h1 {
 
 .sidebar-right {
   height: 100%;
-  width: 80px;
+  width: 90px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -73,6 +92,7 @@ h1 {
   overflow-x: hidden;
   overflow-y: auto; /* add this line */
   padding-top: 20px;
+  margin-right: 5px;
 }
 
 .sidebar a,

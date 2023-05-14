@@ -51,7 +51,7 @@ h1 {
     .bg-image6 {
       background-size: contain;
     }
-  }
+  
   
   @keyframes cycleBackgrounds {
     0% {

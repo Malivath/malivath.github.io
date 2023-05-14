@@ -44,8 +44,13 @@ h1 {
   .bg-image6 {
     animation: cycleBackgrounds 9s linear infinite;
     background-size: cover;
-    background-attachment: fixed;
-  
+    background-position: center; /* Center the background image */
+  }
+
+  @media (max-width: 768px) {
+    .bg-image6 {
+      background-size: contain;
+    }
   }
   
   @keyframes cycleBackgrounds {

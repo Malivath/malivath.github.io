@@ -46,12 +46,6 @@ h1 {
     background-size: cover;
     background-position: center; /* Center the background image */
   }
-
-  @media (max-width: 768px) {
-    .bg-image6 {
-      background-size: contain;
-    }
-  
   
   @keyframes cycleBackgrounds {
     0% {

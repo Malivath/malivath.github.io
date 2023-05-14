@@ -22,6 +22,18 @@ h1 {
   max-width: calc(100vw - 200px); /* subtract the total width of both sidebars */
   margin: 0 auto; /* center the grid horizontally */
 }
+
+@media screen and (max-width: 768px) { /* Change to 2 columns on screens smaller than 768px */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) { /* Change to 1 column on screens smaller than 480px */
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 /* Define the grid items */
 .grid-item {
   border-radius: 20px;

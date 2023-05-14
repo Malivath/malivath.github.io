@@ -22,6 +22,7 @@ h1 {
   max-width: calc(100vw - 200px); /* subtract the total width of both sidebars */
   margin: 0 auto; /* center the grid horizontally */
 }
+<<<<<<< HEAD
 /* Define the grid items */
 .grid-item {
   margin-right: 15px;
@@ -36,6 +37,8 @@ h1 {
   grid-gap: 50px;
   padding: 10px;
 }
+=======
+>>>>>>> f559b6d75d50e022e4deceab6ef597f36c30ecc2
 
 @media screen and (max-width: 768px) { /* Change to 2 columns on screens smaller than 768px */
   .grid-container {
@@ -48,6 +51,16 @@ h1 {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+<<<<<<< HEAD
+=======
+/* Define the grid items */
+.grid-item {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+>>>>>>> f559b6d75d50e022e4deceab6ef597f36c30ecc2
 
 /* Define the image styles */
 .slider-image {
@@ -83,7 +96,11 @@ h1 {
 
 .sidebar-right {
   height: 100%;
+<<<<<<< HEAD
   width: 90px;
+=======
+  width: 80px;
+>>>>>>> f559b6d75d50e022e4deceab6ef597f36c30ecc2
   position: fixed;
   z-index: 1;
   top: 0;
@@ -92,7 +109,10 @@ h1 {
   overflow-x: hidden;
   overflow-y: auto; /* add this line */
   padding-top: 20px;
+<<<<<<< HEAD
   margin-right: 5px;
+=======
+>>>>>>> f559b6d75d50e022e4deceab6ef597f36c30ecc2
 }
 
 .sidebar a,
@@ -116,4 +136,8 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f559b6d75d50e022e4deceab6ef597f36c30ecc2

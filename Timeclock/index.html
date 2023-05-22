@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Clock Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="time"],
+      input[type="text"] {
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+      #result {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Time Clock Calculator</h1>
+
+    <h2>Time Clock</h2>
+    <label for="clockInTime">Clock-in Time:</label>
+    <input type="time" id="clockInTime" />
+    <br />
+    <button onclick="calculateWorkHours()">Calculate</button>
+    <p id="result"></p>
+
+    <h2>Add Hours</h2>
+    <label for="previousHours">Previous Hours:</label>
+    <input type="text" id="previousHours" />
+    <br />
+    <button onclick="addHours()">Add</button>
+    <p id="totalHours"></p>
+    <a class="button" href="../index.html">Portfolio</a>
+    <script>
+      var accumulatedHours = 0;
+
+      function calculateWorkHours() {
+        var clockInTime = document.getElementById("clockInTime").value;
+        var currentTime = new Date().toLocaleTimeString("en-US", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+        var clockIn = new Date("1970-01-01 " + clockInTime);
+        var current = new Date("1970-01-01 " + currentTime);
+        var milliseconds = current - clockIn;
+        var hours = Math.floor(milliseconds / 1000 / 60 / 60);
+        var minutes = Math.floor((milliseconds / 1000 / 60) % 60);
+
+        document.getElementById("result").innerHTML =
+          "You have worked for " +
+          hours +
+          " hours and " +
+          minutes +
+          " minutes.";
+      }
+
+      function addHours() {
+        var previousHours = document.getElementById("previousHours").value;
+        var [hours, minutes] = previousHours.split(":").map(Number);
+        var totalMinutes = hours * 60 + minutes;
+        accumulatedHours += totalMinutes / 60;
+        document.getElementById("totalHours").innerHTML =
+          "Total hours worked this week: " + accumulatedHours.toFixed(2);
+      }
+    </script>
+  </body>
+</html>

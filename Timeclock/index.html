@@ -2,29 +2,7 @@
 <html>
   <head>
     <title>Time Clock Calculator</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      label {
-        display: block;
-        margin-bottom: 10px;
-      }
-      input[type="time"],
-      input[type="text"] {
-        width: 200px;
-        padding: 5px;
-        margin-bottom: 10px;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-      }
-      #result {
-        margin-top: 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Time Clock Calculator</h1>
@@ -37,7 +15,7 @@
     <p id="result"></p>
 
     <h2>Add Hours</h2>
-    <label for="previousHours">Previous Hours:</label>
+    <label for="previousHours">Previous Hours (HH:mm):</label>
     <input type="text" id="previousHours" />
     <br />
     <button onclick="addHours()">Add</button>
@@ -66,6 +44,8 @@
           " hours and " +
           minutes +
           " minutes.";
+
+        clearInputFields(); // Clear input fields after calculations
       }
 
       function addHours() {
@@ -75,6 +55,13 @@
         accumulatedHours += totalMinutes / 60;
         document.getElementById("totalHours").innerHTML =
           "Total hours worked this week: " + accumulatedHours.toFixed(2);
+
+        clearInputFields(); // Clear input fields after calculations
+      }
+
+      function clearInputFields() {
+        document.getElementById("clockInTime").value = "";
+        document.getElementById("previousHours").value = "";
       }
     </script>
   </body>

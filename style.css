@@ -11,6 +11,9 @@
     align-items: center;
     padding: 20px;
   }
+  body {
+    background-color: rgb(187, 187, 187);
+  }
   h1 {
     font-size: 150;
   }
@@ -102,4 +105,21 @@ margin-left: 5%;
   .annoyinglyplacedcode 
   {
     margin-bottom: 56px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .scroll-box {
+    width: 500px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    overflow: auto;
+    border: 1px solid #ccc;
+  }
+  
+  .content {
+    padding: 10px;
   }

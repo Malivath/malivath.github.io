@@ -85,20 +85,23 @@ margin-left: 5%;
     width: 220px;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     border: none;
     text-align: center;
     font-weight: bold;
-    transition: background-color 0.3s ease;
     margin-bottom: 3px;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
+    
+    /* Add these lines */
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, #007bff 0%, #0056b3 51%, #007bff 100%);
+    transition: background-position 0.5s;
+}
+
+.button:hover {
+    background-position: right center;
+}
   p {
    font-size: 130%; 
   }

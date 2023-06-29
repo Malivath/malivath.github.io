@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F3F3;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.certification-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex; /* New line */
+    flex-direction: column; /* New line */
+    align-items: center; /* New line */
+}
+
+.certification-badge {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.certification-card:hover {
+    transform: scale(1.05);
+}
+
+.certification-card:hover .certification-badge {
+    transform: translateY(-20px);
+}
+
+.certification-desc {
+    display: none;
+}
+
+.certification-card:hover .certification-desc {
+    display: block;
+}
+.button {
+    width: 220px;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 3px;
+    
+    /* Add these lines */
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, #007bff 0%, #0056b3 51%, #007bff 100%);
+    transition: background-position 0.5s;
+}
+
+.button:hover {
+    background-position: right center;
+}

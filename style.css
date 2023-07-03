@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,21 +7,32 @@
   }
   
   header {
-    background-color: #4267B2;
+    background-color: #007bff; /* match the button color */
+    background-size: 200% auto; /* match the button gradient size */
+    background-image: linear-gradient(to right, #007bff 0%, #0056b3 51%, #007bff 100%); /* match the button gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-  }
+    transition: background-position 0.5s; /* match the button background transition */
+}
+
+header:hover {
+    background-position: right center; /* match the button hover effect */
+}
+  
   body {
     background-color: rgb(187, 187, 187);
   }
   h1 {
-    font-size: 150;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 300%;
   }
   h2{
-    font-size: 150%;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 200%;
     margin-bottom: 10px;
+    text-align: center;
   }
   .logo img {
     border-radius: 25px;
@@ -126,3 +139,30 @@ margin-left: 5%;
   .content {
     padding: 10px;
   }
+
+  p {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  p:hover {
+    transform: scale(1.5); /* Adjust scale to get desired "pop out" effect */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: rgb(198, 76, 0);
+    text-decoration: underline;
+  }
+
+  h1:hover {
+    transition: transform 0.3s ease-in-out;
+      transform: scale(1.5); /* Adjust scale to get desired "pop out" effect */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      color: rgb(198, 76, 0);
+      text-decoration: underline;
+    }
+
+    h2:hover {
+      transition: transform 0.3s ease-in-out;
+        transform: scale(1.5); /* Adjust scale to get desired "pop out" effect */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        color: rgb(198, 76, 0);
+        text-decoration: underline;
+      }

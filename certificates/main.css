@@ -71,3 +71,7 @@ h2 {
 .button:hover {
     background-position: right center;
 }
+
+p {
+    text-align: center;
+}

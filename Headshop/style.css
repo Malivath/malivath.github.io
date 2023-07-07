@@ -43,6 +43,17 @@ body {
     text-transform: lowercase;
     font-size: 0.4em; /* adjust this as needed */
 }
+
+/* Styles applied when screen width is 600px or less */
+@media only screen and (max-width: 650px) {
+  .title {
+      font-size: 3em; /* Adjust this to the desired size */
+  }
+
+  .subtitle {
+      font-size: 1.2em; /* Adjust this to the desired size */
+  }
+}
 .aboutme {
     background: rgba(139, 139, 139, 0.712);
     font-size: larger;
@@ -54,26 +65,27 @@ text-align: center;
 margin-left: 25%;
 }
 .buttons-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 20px; /* This adds some space above the buttons */
+  display: flex;
+  flex-wrap: wrap; /* allows the buttons to wrap to next line on smaller screens */
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+  gap: 20px; /* adds space between the buttons when they wrap */
 }
 
-/* 12 */
-.btn-12{
-    position: relative;
-    right: 20px;
-    bottom: 20px;
-    border:none;
-    box-shadow: none;
-    width: 130px;
-    height: 40px;
-    line-height: 42px;
-    -webkit-perspective: 230px;
-    perspective: 230px;
-    background-color: #ebe189;
-  }
+.btn-12 {
+  position: relative;
+  right: 20px;
+  bottom: 20px;
+  border: none;
+  box-shadow: none;
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  -webkit-perspective: 230px;
+  perspective: 230px;
+  background-color: #ebe189;
+}
   
   .btn-12 span {
     background: rgba(126, 124, 106, 0);
@@ -135,4 +147,14 @@ margin-left: 25%;
     -moz-transform: rotateX(-90deg);
     transform: rotateX(-90deg);
   }
+
+  /* Styles applied when screen width is 600px or less */
+@media only screen and (max-width: 650px) {
+  .btn-12 {
+      width: 100px; /* Reduce width of buttons on smaller screens */
+      height: 30px; /* You can adjust this as per your requirement */
+      line-height: 30px; /* You can adjust this as per your requirement */
+      margin-top: 8px;
+  }
+}
   

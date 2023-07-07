@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Kablammo&family=Open+Sans:wght@300&display=swap');
+
+body {
+    background-image: url(/Headshop/public/6f154589fc884d1d8d9f2cafc0424c46.png);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #ffffff 0%, transparent 10%),
+                linear-gradient(to bottom, #ebe187 0%,#ebe189 60%,#ffffff 100%),
+                radial-gradient(circle at 100px 150px, #ffffff, transparent 40%),
+                radial-gradient(circle at 200px 250px, #ffffff, transparent 40%),
+                radial-gradient(circle at 300px 350px, #ffffff, transparent 40%);
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 300px; /* Adjust this to control the thickness of the header */
+    margin: 0;
+    padding: 20px; /* You can adjust this to add some space inside the header */
+    border-radius: 10%;
+}
+
+.title {
+    font-family: 'Caprasimo', cursive;
+    color: red;
+    font-size: 5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px #000; 
+}
+
+.subtitle {
+    color: brown;
+    font-size: 2em;
+    margin: 0;
+    text-shadow: 2px 2px 4px #000; 
+}
+.small-text {
+    text-transform: lowercase;
+    font-size: 0.4em; /* adjust this as needed */
+}
+.aboutme {
+    background: rgba(139, 139, 139, 0.712);
+    font-size: larger;
+        color: rgb(255, 255, 255);
+        text-shadow: 2px 2px 2px rgba(255, 204, 0, 0.7), /* Yellow shadow */
+                     -2px -2px 2px rgb(139, 19, 19); /* Brown shadow */
+    width: 50%;
+text-align: center;
+margin-left: 25%;
+}
+.buttons-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px; /* This adds some space above the buttons */
+}
+
+/* 12 */
+.btn-12{
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    border:none;
+    box-shadow: none;
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+    background-color: #ebe189;
+  }
+  
+  .btn-12 span {
+    background: rgba(126, 124, 106, 0);
+    background: linear-gradient(0deg, rgba(235,225,135,1) 0%, rgba(255,0,0,1) 100%);
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    border-radius: 5px;
+    margin:0;
+    color: #333; /* Change text color to something darker for better visibility */
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+  .btn-12 span:nth-child(1) {
+    box-shadow:
+     -7px -7px 20px 0px #fff9,
+     -4px -4px 5px 0px #fff9,
+     7px 7px 20px 0px #0002,
+     4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12:hover span:nth-child(1) {
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    background: rgb(255,0,0);
+    background: linear-gradient(0deg, rgba(255,0,0,1) 0%, rgba(235,225,135,1) 100%); /* Flip the gradient on hover */
+}
+  .btn-12:hover span:nth-child(2) {
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+   color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
+  

@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Kablammo&family=Open+Sans:wght@300&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
+body.page1, body.page2, body.page3, body.page4, body.page5 {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 body.page1 {
   background-image: url(/Headshop/public/6f154589fc884d1d8d9f2cafc0424c46.png);
   font-family: Arial, sans-serif;
@@ -124,7 +138,8 @@ body.page5 {
   perspective: 230px;
   background-color: #ebe189;
 }
-  
+
+
   .btn-12 span {
     background: rgba(126, 124, 106, 0);
     background: linear-gradient(0deg, rgba(235,225,135,1) 0%, rgba(255,0,0,1) 100%);
@@ -293,5 +308,23 @@ body.page5 {
       width: 100px; /* Reduce width of buttons on smaller screens */
       height: 30px; /* You can adjust this as per your requirement */
       line-height: 30px; /* You can adjust this as per your requirement */
+  }
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
+
+.contact-info {
+  text-align: right;
+}
+
+@media only screen and (max-width: 650px){
+  .contact-info {
+    text-align: center;
   }
 }

@@ -26,7 +26,7 @@ submitButton.addEventListener("click", function() {
   // Check if the user is 18 or older
   if (age >= minAge) {
     // Redirect the user to the home page
-    window.location.href = "./main/main.html";
+    window.location.href = "main.html";
   } else {
     // Display an error message
     ageVerification.innerHTML = "<h2><a href='https://www.google.com'>You must be 18 years or older to enter this site. Click here to appeal.</a></h2>";

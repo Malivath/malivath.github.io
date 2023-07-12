@@ -15,31 +15,31 @@ body.page1, body.page2, body.page3, body.page4, body.page5 {
 }
 
 body.page1 {
-  background-image: url(/Headshop/public/6f154589fc884d1d8d9f2cafc0424c46.png);
+  background-image: url(./public/6f154589fc884d1d8d9f2cafc0424c46.png);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 body.page2 {
-  background-image: url(/Headshop/public/adult.png);
+  background-image: url(./public/adults.jpg);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 body.page3 {
-  background-image: url(/Headshop/public/tackle.png);
+  background-image: url(./public/tackle.png);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 body.page4 {
-  background-image: url(/Headshop/public/misc.png);
+  background-image: url(./public/misc.png);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 body.page5 {
-  background-image: url(/Headshop/public/pipes.png);
+  background-image: url(./public/pipes.png);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;

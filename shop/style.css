@@ -85,7 +85,11 @@ body.page5 {
 }
 .small-text {
     text-transform: lowercase;
+    color: #a5a5a5;
     font-size: 0.4em; /* adjust this as needed */
+}
+.subsmall {
+  font-size: 0.6em;
 }
 
 /* Styles applied when screen width is 600px or less */
@@ -315,13 +319,11 @@ footer {
   background-color: #333;
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 0px;
   margin-top: auto;
+  font-size: small;
 }
 
-.contact-info {
-  text-align: right;
-}
 
 @media only screen and (max-width: 650px){
   .contact-info {

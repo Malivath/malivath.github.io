@@ -51,6 +51,20 @@ body.page5 {
   }
 }
 
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
 .header {
     display: flex;
     flex-direction: column;
@@ -70,6 +84,41 @@ body.page5 {
       /* Other styles... */
   box-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
   transition: box-shadow 0.5s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.header::before {
+  content: "";
+  width: 104%;
+  height: 102%;
+  border-radius: 10%;
+  background-image: linear-gradient(
+    var(--rotate)
+    , #f7ec6f, #f0a202 43%, #ffffff);
+  position: absolute;
+  z-index: -1;
+  top: -1%;
+  left: -2%;
+  animation: spin 10s linear infinite;
+}
+
+.header::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  transform: scale(0.8);
+  filter: blur(10px);
+  background-image: linear-gradient(
+    var(--rotate)
+    , #f7ec6f, #f0a202 43%, #ffffff);
+  opacity: 1;
+  transition: opacity 5s;
+  animation: spin 10s linear infinite;
 }
 
 .header:hover {
@@ -147,7 +196,7 @@ body.page5 {
   line-height: 42px;
   -webkit-perspective: 230px;
   perspective: 230px;
-  background-color: #ebe189;
+  background-color: #ebe18900;
 }
 
 
@@ -337,3 +386,4 @@ footer {
     text-align: center;
   }
 }
+

@@ -67,6 +67,13 @@ body.page5 {
     margin: 0;
     padding: 20px; /* You can adjust this to add some space inside the header */
     border-radius: 10%;
+      /* Other styles... */
+  box-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
+  transition: box-shadow 0.5s ease;
+}
+
+.header:hover {
+  box-shadow: 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 50px #ff0, 0 0 60px #ff0;
 }
 
 .title {

@@ -166,3 +166,7 @@ margin-left: 5%;
         color: rgb(198, 76, 0);
         text-decoration: underline;
       }
+
+      footer {
+        background-color: #007bff;
+      }

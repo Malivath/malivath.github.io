@@ -30,12 +30,7 @@ h1 {
   padding: 10px;
   text-align: center;
 }
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 50px;
-  padding: 10px;
-}
+
 
 @media screen and (max-width: 768px) { /* Change to 2 columns on screens smaller than 768px */
   .grid-container {

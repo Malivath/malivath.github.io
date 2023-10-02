@@ -12,7 +12,7 @@ body {
   user-select: none; /* Standard syntax */
 }
 
-header {
+.header {
   position: fixed;  /* Fixed position */
   top: 0;  /* Stick to the top */
   left: 0;  /* Stick to the left */
@@ -20,13 +20,12 @@ header {
   z-index: 100;  /* Overlay content below */
   /* Your existing styles */
   display: grid;
-  grid-template-columns: auto 1fr auto auto; /* This means logo takes space it needs, site-title takes as much as it can, search bar and icons take only the space they need */
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 2fr auto auto;
   align-items: center;
   background-color: #212121;
   color: #000000;
   padding-bottom: 10px;
-  padding: 10px;
-  z-index: 100; /* To ensure the header is on top of other content */
 }
 
 .searchbar {
@@ -115,7 +114,6 @@ header {
 
 
 h2 {
-  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
@@ -253,6 +251,7 @@ video#background-video {
 /* Define the grid container */
 .grid-container {
   position: relative;
+  top: 250px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 150px;
@@ -263,6 +262,7 @@ video#background-video {
 /* Define the grid items */
 .grid-item {
   background-color: #0c0c0ca4;
+  margin-right: 15px;
   box-shadow: 0 0 1.25px #00ff00, 0 0 2.5px #00ff00, 0 0 5px #00ff00, 0 0 7.5px #00ff00, 0 0 10px #00ff00; /* Reduce the neon glow */
   padding: 10px;
   text-align: center;
@@ -272,7 +272,6 @@ video#background-video {
   border: 1px solid #00ff00;
   padding: 10px;
   text-align: center;
-  width: 400px;
 }
 
 .grid-item img.slider-image {
@@ -281,6 +280,22 @@ video#background-video {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media (max-width: 1920px) {
+  .grid-container {
+    gap: 10px;
+    
+  }
+
+  .grid-item {
+    transform: scale(0.75);
+  }
+
+  .content {
+    font-size: 75%;
+  }
+}
+
 
 /* Define the image styles */
 .slider-image {
@@ -306,7 +321,7 @@ button {
   position: relative;
   display: inline-block;
   padding: 25px 30px;
-  margin: 10px;
+  margin: 40px;
   color: #9400D3; /* Neon purple */
   background: #32CD32; /* Neon green */
   text-decoration: none;
@@ -554,7 +569,13 @@ input[type="text"], input[type="email"], textarea {
   padding: 5px; /* Padding can help ensure the border doesn't hug the icon too closely */
 }
 
-
+/* Media query for screens smaller than 768px */
+@media (max-width: 767px) {
+  .discord-icon {
+    margin-left: 10px; /* Reducing margin for mobile */
+    font-size: 25px; /* Reducing the icon size for mobile */
+  }
+}
 
 .contact-header {
   font-size: 3em; /* or whatever smaller size you want */
@@ -680,120 +701,7 @@ input[type="text"], input[type="email"], textarea {
   font-size: 0.9rem; /* Adjust font size as needed */
 }
 
-
-@media (max-width: 1920px){
-  .grid-container {
-    margin-right: 425px;
-  }
-}
-
-  
-
 @media (max-width: 767px) {
-  body {
-      width: 767px;
-    padding-top: 90%; /* Remove the large top padding on smaller screens */
-    overflow: auto; /* Allow scrolling on smaller screens */
-  }
-
-  h2 {
-    font-size: 20px; /* Decrease font size for smaller screens */
-  }
-
-  .grid-container {
-    margin-left: 22%;
-    display: block; /* Change to a block layout for easier stacking */
-    top: 0; /* Reset the top position */
-    width: 100%; /* Make it full width */
-    margin-top: 0; /* Reset margin-top */
-  }
-
-  .grid-item {
-    width: 100%; /* Make each item full width on smaller screens */
-  }
-
-  .grid-item img.slider-image {
-    width: 50%; /* Make images full width */
-  }
-
-  .prev-btn,
-  .next-btn {
-    margin: 10px auto; /* Center the buttons */
-    font-size: 14px; /* Decrease font size for smaller screens */
-  }
-
-  header {
-    width: 100%;
-    text-align: center;
-    background-color: #212121;
-    display: flex;
-    flex-direction: column; /* Change to a column layout for smaller screens */
-    align-items: center; /* Center-align content horizontally */
-  }
-
-  .site-title {
-    font-size: 3rem;
-    margin-top: 10px;
-    margin-left: 0; /* Remove margin-left to center the title */
-  }
-
-  .searchbar {
-    margin-top: 10px;
-    grid-row: auto;
-    grid-column: auto;
-    max-width: none;
-  }
-
-  .icon-buttons {
-    margin-top: 10px;
-  }
-
-  .icon-buttons i {
-    font-size: 2rem;
-  }
-
-  .nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav ul li {
-    font-size: 2rem;
-    width: 40%;
-    padding: 10px 0;
-    box-sizing: border-box;
-  }
-
-  .neon-button,
-  .nav a {
-    font-size: 1rem;
-    max-width: none;
-    max-height: none;
-    height: 30%;
-    width: 55%;
-    margin-bottom: 5px;
-  }
-
-  .logo {
-    margin-right: 130px;
-    width: 120px; /* Set the width */
-    height: auto; /* Keep the aspect ratio */
-    margin-top: 3px;
-    border-radius: 50px;
-    margin-left: 100px;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f900;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s, visibility 0.2s;
-  }
   header {
     width: 100%;
     text-align: center;

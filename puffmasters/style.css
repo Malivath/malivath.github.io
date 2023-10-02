@@ -115,7 +115,6 @@ header {
 
 
 h2 {
-  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
@@ -701,7 +700,7 @@ input[type="text"], input[type="email"], textarea {
   }
 
   .grid-container {
-    margin-left: 22%;
+    margin-left: 30%;
     display: block; /* Change to a block layout for easier stacking */
     top: 0; /* Reset the top position */
     width: 100%; /* Make it full width */
@@ -709,7 +708,8 @@ input[type="text"], input[type="email"], textarea {
   }
 
   .grid-item {
-    width: 100%; /* Make each item full width on smaller screens */
+    margin-bottom: 15px;
+    width: 250px; /* Make each item full width on smaller screens */
   }
 
   .grid-item img.slider-image {
@@ -719,10 +719,12 @@ input[type="text"], input[type="email"], textarea {
   .prev-btn,
   .next-btn {
     margin: 10px auto; /* Center the buttons */
-    font-size: 14px; /* Decrease font size for smaller screens */
+    font-size: 8px; /* Decrease font size for smaller screens */
+    padding: 10px 15px;
   }
 
   header {
+    margin-top: ne;
     width: 100%;
     text-align: center;
     background-color: #212121;
@@ -732,24 +734,22 @@ input[type="text"], input[type="email"], textarea {
   }
 
   .site-title {
-    font-size: 3rem;
-    margin-top: 10px;
+    font-size: 2.5rem;
+    margin-top: 5px;
     margin-left: 0; /* Remove margin-left to center the title */
   }
 
   .searchbar {
-    margin-top: 10px;
+    margin-top: 5px;
     grid-row: auto;
     grid-column: auto;
     max-width: none;
   }
 
-  .icon-buttons {
-    margin-top: 10px;
-  }
 
   .icon-buttons i {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
   }
 
   .nav ul {
@@ -759,101 +759,27 @@ input[type="text"], input[type="email"], textarea {
   }
 
   .nav ul li {
-    font-size: 2rem;
-    width: 40%;
-    padding: 10px 0;
+    font-size: 1.5rem;
+    width: 33%;
+    padding: 1px 0;
     box-sizing: border-box;
   }
 
   .neon-button,
   .nav a {
-    font-size: 1rem;
+    font-size: .8rem;
     max-width: none;
     max-height: none;
     height: 30%;
     width: 55%;
-    margin-bottom: 5px;
+
   }
 
   .logo {
-    margin-right: 130px;
     width: 120px; /* Set the width */
     height: auto; /* Keep the aspect ratio */
-    margin-top: 3px;
+    margin-top: 1px;
     border-radius: 50px;
-    margin-left: 100px;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f900;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s, visibility 0.2s;
-  }
-  header {
-    width: 100%;
-    text-align: center;
-    background-color: #212121;
-    display: flex;
-    flex-direction: column; /* Change to a column layout for smaller screens */
-    align-items: center; /* Center-align content horizontally */
-  }
-
-  .site-title {
-    font-size: 3rem;
-    margin-top: 10px;
-    margin-left: 0; /* Remove margin-left to center the title */
-  }
-
-  .searchbar {
-    margin-top: 10px;
-    grid-row: auto;
-    grid-column: auto;
-    max-width: none;
-  }
-
-  .icon-buttons {
-    margin-top: 10px;
-  }
-
-  .icon-buttons i {
-    font-size: 2rem;
-  }
-
-  .nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav ul li {
-    font-size: 2rem;
-    width: 40%;
-    padding: 10px 0;
-    box-sizing: border-box;
-  }
-
-  .neon-button,
-  .nav a {
-    font-size: 1rem;
-    max-width: none;
-    max-height: none;
-    height: 30%;
-    width: 55%;
-    margin-bottom: 5px;
-  }
-
-  .logo {
-    margin-right: 130px;
-    width: 120px; /* Set the width */
-    height: auto; /* Keep the aspect ratio */
-    margin-top: 3px;
-    border-radius: 50px;
-    margin-left: 100px;
   }
   .dropdown-content {
     display: none;

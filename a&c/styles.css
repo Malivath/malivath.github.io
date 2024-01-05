@@ -137,10 +137,58 @@ body .welcome-section .logo {
   padding: 20px;
   background: #ddd;
   text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
   .services-grid, .technicians-grid, .contact-grid {
     grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 450px) {
+  .welcome-section,
+  .services-grid,
+  .about-section,
+  .technicians-grid,
+  .contact-grid,
+  .mp,
+  .location-hours {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .about-section {
+    margin-left: 2%;
+    width: 100%;
+  }
+  .about-section p {
+    font-size: 16px;
+  }
+  .services-grid {
+    margin-left: 20%;
+  }
+  .services-grid .service-item,
+  .contact-grid .contact-item {
+    margin-left: 0;
+    width: auto;
+  }
+  .contact-grid {
+    margin-left: 25%;
+  }
+  .social-links a {
+    font-size: 20px;
+  }
+  .welcome-section {
+    width: 100%;
+  }
+  .location-hours {
+    width: 100%;
+    margin-left: 2%;
+  }
+  iframe {
+    width: 400px;
+  }
+  .mp {
+    margin-left: 2%;
+    width: 100%;
   }
 }/*# sourceMappingURL=styles.css.map */

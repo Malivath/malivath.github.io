@@ -158,6 +158,7 @@ body {
         padding: 20px;
         background: #ddd;
         text-align: center;
+        width: 100%;
     }
 
 
@@ -165,4 +166,56 @@ body {
     .services-grid, .technicians-grid, .contact-grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 450px) {
+    .welcome-section,
+    .services-grid,
+    .about-section,
+    .technicians-grid,
+    .contact-grid,
+    .mp,
+    .location-hours {
+        padding-left: 10px; // Adjust as needed to center content
+        padding-right: 10px; // Adjust as needed to center content
+    }
+    .about-section {
+        margin-left: 2%; // Reset the left margin
+        width: 100%; // Full width
+
+        p {
+            font-size: 16px; // Smaller font size for smaller screens
+        }
+    }
+.services-grid{
+    margin-left: 20%;
+}
+    .services-grid .service-item,
+    .contact-grid .contact-item {
+        margin-left: 0; // Reset the left margin for smaller screens
+        width: auto; // Auto width to fit content
+    }
+
+    .contact-grid {
+        margin-left: 25%; // Reset the left margin for smaller screens
+    }
+
+    .social-links {
+        a {
+            font-size: 20px; // Smaller icons for smaller screens
+        }
+    }
+    .welcome-section{
+        
+        width: 100%;
+    }
+    .location-hours{
+        width: 100%;
+        margin-left: 2%;
+    }
+    iframe{
+        width: 400px;
+    }
+    .mp{margin-left: 2%;
+    width: 100%;}
 }

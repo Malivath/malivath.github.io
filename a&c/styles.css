@@ -37,7 +37,24 @@ body .welcome-section .semi-transparent {
 }
 body .welcome-section .logo {
   max-height: 25vh;
-  margin-left: 35px;
+  position: static;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 800px) {
+  body .welcome-section .social-links {
+    position: static;
+    display: flex;
+    justify-content: center;
+  }
+  body .welcome-section .social-links a {
+    color: rgb(0, 29, 110);
+    margin: 0 5px;
+  }
+  body .welcome-section .logo {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .services-grid {

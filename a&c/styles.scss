@@ -44,7 +44,30 @@ body {
 
         .logo {
             max-height: 25vh;
-            margin-left: 35px;
+            position: static; // Make the social links flow in the document
+            display: flex; // Align items in a row
+            justify-content: center; // Center items horizontally
+        }
+    }
+
+    // Media query for screens smaller than 800px
+    @media (max-width: 800px) {
+        .welcome-section {
+            .social-links {
+                position: static; // Make the social links flow in the document
+                display: flex; // Align items in a row
+                justify-content: center; // Center items horizontally
+
+                a {
+                    color: rgb(0, 29, 110);
+                    margin: 0 5px; // Adjust spacing between icons
+                }
+            }
+
+            .logo {
+                margin-left: 0; // Reset the left margin
+                margin-bottom: 20px; // Add space between logo and heading
+            }
         }
     }
 }

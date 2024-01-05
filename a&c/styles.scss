@@ -1,0 +1,145 @@
+$divcolor-color: rgba(0, 0, 0, 0.5);
+$border-radius: 10px;
+
+body {
+    background-image: url('/bg4k.jpeg');
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    .welcome-section {
+        position: relative; // For absolute positioning of social-links
+        background-size: cover;
+        padding: 20px;
+        text-align: center;
+        color: white;
+
+        .social-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 40px;
+
+            a {
+                color: white; // Set icon color
+                margin-left: 10px; // Space out icons
+                font-size: 24px; // Icon size
+
+                &:hover {
+                    color: #ddd; // Color on hover
+                }
+            }
+        }
+
+        .semi-transparent {
+            background: $divcolor-color; // Use the variable
+            background-size: cover;
+            padding: 20px;
+            text-align: center;
+            display: flex; // Use Flexbox
+            flex-direction: column; // Stack items vertically
+            align-items: center; // Center items horizontally
+            justify-content: center; // Center items vertically
+        }
+
+        .logo {
+            max-height: 25vh;
+            margin-left: 35px;
+        }
+    }
+}
+
+    .services-grid {
+        display: flex; // Use Flexbox
+        justify-content: center; // Center horizontally
+        align-items: center; // Center vertically
+        flex-wrap: wrap; // Allow items to wrap to the next line
+        gap: 10px; // Keep your gap
+        padding: 20px; // Keep your padding
+        
+
+        .service-item {
+            flex: 0 1 250px;
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            border-color: black;
+            border-style: solid;
+            border-radius: $border-radius;
+            margin-left: 40px;
+        }
+    }
+
+    .about-section {
+        margin-left: 25%;
+        width: 50%;
+        padding: 20px;
+        background: #ddd;
+        text-align: center;
+        border-color: black;
+        border-style: solid;
+        border-radius: $border-radius;
+
+        p {
+            font-size: 20px;
+        }
+    }
+
+    .technicians-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 20px;
+
+        .technician-item {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: $border-radius;
+        }
+    }
+
+    .contact-grid {
+        display: flex; // Use Flexbox
+        justify-content: center; // Center horizontally
+        align-items: center; // Center vertically
+        flex-wrap: wrap; // Allow items to wrap to the next line
+        gap: 10px; // Keep your gap
+        padding: 20px; // Keep your padding
+        margin-left: 44px;
+
+        .contact-item {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            width: 25%;
+            border-color: black;
+            border-style: solid;
+            border-radius: $border-radius;
+        }
+    }
+
+    .mp {
+        background-color: rgba(0, 0, 0, 0.486);
+        justify-content: center; // Center horizontally
+        align-items: center; // Center vertically
+        text-align: center;
+        color: #ddd;
+
+        h2 {
+            padding-top: 10px;
+        }
+    }
+
+    .location-hours {
+        padding: 20px;
+        background: #ddd;
+        text-align: center;
+    }
+
+
+@media (max-width: 600px) {
+    .services-grid, .technicians-grid, .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}

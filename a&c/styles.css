@@ -145,7 +145,7 @@ body .welcome-section .logo {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .welcome-section,
   .services-grid,
   .about-section,
@@ -157,14 +157,14 @@ body .welcome-section .logo {
     padding-right: 10px;
   }
   .about-section {
-    margin-left: 2%;
-    width: 100%;
+    margin-left: 8%;
+    width: 80%;
   }
   .about-section p {
     font-size: 16px;
   }
   .services-grid {
-    margin-left: 20%;
+    margin-left: 8%;
   }
   .services-grid .service-item,
   .contact-grid .contact-item {
@@ -172,23 +172,29 @@ body .welcome-section .logo {
     width: auto;
   }
   .contact-grid {
-    margin-left: 25%;
+    margin-left: 10%;
   }
   .social-links a {
     font-size: 20px;
   }
   .welcome-section {
-    width: 100%;
+    margin-left: 5%;
+    width: 80%;
   }
   .location-hours {
-    width: 100%;
-    margin-left: 2%;
+    width: 80%;
+    margin-left: 8%;
   }
   iframe {
-    width: 400px;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
   }
   .mp {
-    margin-left: 2%;
-    width: 100%;
+    margin-left: 8%;
+    width: 80%;
+  }
+  .logo {
+    height: 15vh;
   }
 }/*# sourceMappingURL=styles.css.map */

@@ -168,7 +168,7 @@ body {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .welcome-section,
     .services-grid,
     .about-section,
@@ -180,15 +180,15 @@ body {
         padding-right: 10px; // Adjust as needed to center content
     }
     .about-section {
-        margin-left: 2%; // Reset the left margin
-        width: 100%; // Full width
+        margin-left: 8%; // Reset the left margin
+        width: 80%; // Full width
 
         p {
             font-size: 16px; // Smaller font size for smaller screens
         }
     }
 .services-grid{
-    margin-left: 20%;
+    margin-left: 8%;
 }
     .services-grid .service-item,
     .contact-grid .contact-item {
@@ -197,7 +197,7 @@ body {
     }
 
     .contact-grid {
-        margin-left: 25%; // Reset the left margin for smaller screens
+        margin-left: 10%; // Reset the left margin for smaller screens
     }
 
     .social-links {
@@ -206,16 +206,25 @@ body {
         }
     }
     .welcome-section{
-        
-        width: 100%;
+        margin-left: 5%;
+        width: 80%;
     }
     .location-hours{
-        width: 100%;
-        margin-left: 2%;
+        width: 80%;
+        margin-left: 8%;
     }
     iframe{
-        width: 400px;
+        width: 300px;
+        height: 300px;
+        padding: 10px;
     }
-    .mp{margin-left: 2%;
-    width: 100%;}
+    .mp {
+    margin-left: 8%;
+    width: 80%;
+}
+    
+    .logo {
+        height: 15vh;
+        
+    }
 }

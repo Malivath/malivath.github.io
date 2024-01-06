@@ -8,11 +8,11 @@ body {
     padding: 0;
 
     .welcome-section {
-        position: relative; // For absolute positioning of social-links
+        position: relative;
         background-size: cover;
-        padding: 20px;
         text-align: center;
         color: white;
+        width: 100%;
 
         .social-links {
             position: absolute;
@@ -21,90 +21,73 @@ body {
             padding: 40px;
 
             a {
-                color: white; // Set icon color
-                margin-left: 10px; // Space out icons
-                font-size: 24px; // Icon size
+                color: white;
+                margin-left: 10px;
+                font-size: 24px;
 
                 &:hover {
-                    color: #ddd; // Color on hover
+                    color: #ddd;
                 }
             }
         }
 
+        .location-hours {
+            width: 100%;
+        }
+
         .semi-transparent {
-            background: $divcolor-color; // Use the variable
-            background-size: cover;
+            background: $divcolor-color;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            text-align: center;
-            display: flex; // Use Flexbox
-            flex-direction: column; // Stack items vertically
-            align-items: center; // Center items horizontally
-            justify-content: center; // Center items vertically
+            width: 100%;
         }
 
         .logo {
             max-height: 25vh;
-            position: static; // Make the social links flow in the document
-            display: flex; // Align items in a row
-            justify-content: center; // Center items horizontally
+            position: static;
+            display: flex;
+            justify-content: center;
         }
     }
 
-    // Media query for screens smaller than 800px
     @media (max-width: 800px) {
         .welcome-section {
             .social-links {
-                position: static; // Make the social links flow in the document
-                display: flex; // Align items in a row
-                justify-content: center; // Center items horizontally
+                position: static;
+                display: flex;
+                justify-content: center;
 
                 a {
                     color: rgb(0, 29, 110);
-                    margin: 0 5px; // Adjust spacing between icons
+                    margin: 0 5px;
                 }
             }
 
             .logo {
-                margin-left: 0; // Reset the left margin
-                margin-bottom: 20px; // Add space between logo and heading
+                margin: 0 0 20px;
             }
         }
     }
-}
 
     .services-grid {
-        display: flex; // Use Flexbox
-        justify-content: center; // Center horizontally
-        align-items: center; // Center vertically
-        flex-wrap: wrap; // Allow items to wrap to the next line
-        gap: 10px; // Keep your gap
-        padding: 20px; // Keep your padding
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px;
 
         .service-item {
             flex: 0 1 250px;
             background: #f0f0f0;
             padding: 20px;
             text-align: center;
-            border-color: black;
-            border-style: solid;
+            border: solid black;
             border-radius: $border-radius;
             margin-left: 40px;
-        }
-    }
-
-    .about-section {
-        margin-left: 25%;
-        width: 50%;
-        padding: 20px;
-        background: #ddd;
-        text-align: center;
-        border-color: black;
-        border-style: solid;
-        border-radius: $border-radius;
-
-        p {
-            font-size: 20px;
         }
     }
 
@@ -123,12 +106,12 @@ body {
     }
 
     .contact-grid {
-        display: flex; // Use Flexbox
-        justify-content: center; // Center horizontally
-        align-items: center; // Center vertically
-        flex-wrap: wrap; // Allow items to wrap to the next line
-        gap: 10px; // Keep your gap
-        padding: 20px; // Keep your padding
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px;
         margin-left: 44px;
 
         .contact-item {
@@ -136,17 +119,36 @@ body {
             padding: 20px;
             text-align: center;
             width: 32%;
-            border-color: black;
-            border-style: solid;
+            border: solid black;
             border-radius: $border-radius;
         }
     }
 
-    .mp {
-        background-color: rgba(0, 0, 0, 0.486);
-        justify-content: center; // Center horizontally
-        align-items: center; // Center vertically
+    .about-section,
+    .mp,
+    .location-hours {
+        padding: 20px;
+        background: #ddd;
         text-align: center;
+        border: solid black;
+        border-radius: $border-radius;
+        width: 100%;
+    }
+
+    .about-section {
+        margin-left: 25%;
+        width: 50%;
+
+        p {
+            font-size: 20px;
+        }
+    }
+
+    .mp {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.486);
+        justify-content: center;
+        align-items: center;
         color: #ddd;
 
         h2 {
@@ -154,79 +156,92 @@ body {
         }
     }
 
-    .location-hours {
-        padding: 20px;
-        background: #ddd;
-        text-align: center;
-        width: 100%;
-    }
 
 
-@media (max-width: 600px) {
-    .services-grid, .technicians-grid, .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    }
-    
-
-@media (max-width: 500px) {
-    .welcome-section,
-    .services-grid,
-    .about-section,
-    .technicians-grid,
-    .contact-grid,
-    .mp,
-    .location-hours {
-        padding-left: 10px; // Adjust as needed to center content
-        padding-right: 10px; // Adjust as needed to center content
-    }
-    .about-section {
-        margin-left: 8%; // Reset the left margin
-        width: 80%; // Full width
-
-        p {
-            font-size: 16px; // Smaller font size for smaller screens
+    @media (max-width: 600px) {
+        .services-grid,
+        .technicians-grid,
+        .contact-grid {
+            grid-template-columns: 1fr;
         }
     }
-.services-grid{
-    margin-left: 8%;
-}
-    .services-grid .service-item,
-    .contact-grid .contact-item {
-        margin-left: 0; // Reset the left margin for smaller screens
-        width: auto; // Auto width to fit content
-    }
 
-    .contact-grid {
-        margin-left: 10%; // Reset the left margin for smaller screens
-    }
-
-    .social-links {
-        a {
-            font-size: 20px; // Smaller icons for smaller screens
+    @media (max-width: 500px) {
+        .services-grid,
+        .contact-grid {
+            margin-left: 0;
         }
-    }
-    .welcome-section{
-        margin-left: 5%;
-        width: 80%;
-    }
-    .location-hours{
-        width: 80%;
-        margin-left: 8%;
-    }
-    iframe{
-        width: 300px;
-        height: 300px;
-        padding: 10px;
-    }
-    .mp {
-    margin-left: 8%;
-    width: 80%;
-}
-    
-    .logo {
-        height: 15vh;
+
+        .about-section {
+            margin-left: 4%;
+            width: 80%;
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .services-grid .service-item,
+        .contact-grid .contact-item {
+            margin-left: 0;
+            width: auto;
+        }
+
+        .contact-grid {
+            margin-left: 4%;
+        }
+
+        .social-links a {
+            font-size: 20px;
+        }
+
         
+        .location-hours,
+        .mp {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .location-hours{
+            width: 100%;
+
+        }
+
+        .logo,
+        iframe {
+            height: 15vh;
+        }
+
+        iframe {
+            width: 300px;
+            height: 300px;
+            padding: 10px;
+        }
     }
+
+    @media (max-width: 400px) {
+        iframe {
+            width: 250px;
+            height: 250px;
+        }
+
+        .logo {
+            height: 20vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+        p {
+            font-size: smaller;
+        }
+    }
+
+    @media (max-width: 350px) {
+        iframe {
+            width: 225px;
+            height: 225px;
+        }
+    }   
 }

@@ -7,9 +7,9 @@ body {
 body .welcome-section {
   position: relative;
   background-size: cover;
-  padding: 20px;
   text-align: center;
   color: white;
+  width: 100%;
 }
 body .welcome-section .social-links {
   position: absolute;
@@ -25,15 +25,17 @@ body .welcome-section .social-links a {
 body .welcome-section .social-links a:hover {
   color: #ddd;
 }
+body .welcome-section .location-hours {
+  width: 100%;
+}
 body .welcome-section .semi-transparent {
   background: rgba(0, 0, 0, 0.5);
-  background-size: cover;
-  padding: 20px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  width: 100%;
 }
 body .welcome-section .logo {
   max-height: 25vh;
@@ -52,12 +54,10 @@ body .welcome-section .logo {
     margin: 0 5px;
   }
   body .welcome-section .logo {
-    margin-left: 0;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
   }
 }
-
-.services-grid {
+body .services-grid {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,45 +65,28 @@ body .welcome-section .logo {
   gap: 10px;
   padding: 20px;
 }
-.services-grid .service-item {
+body .services-grid .service-item {
   flex: 0 1 250px;
   background: #f0f0f0;
   padding: 20px;
   text-align: center;
-  border-color: black;
-  border-style: solid;
+  border: solid black;
   border-radius: 10px;
   margin-left: 40px;
 }
-
-.about-section {
-  margin-left: 25%;
-  width: 50%;
-  padding: 20px;
-  background: #ddd;
-  text-align: center;
-  border-color: black;
-  border-style: solid;
-  border-radius: 10px;
-}
-.about-section p {
-  font-size: 20px;
-}
-
-.technicians-grid {
+body .technicians-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding: 20px;
 }
-.technicians-grid .technician-item {
+body .technicians-grid .technician-item {
   background: #fff;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
 }
-
-.contact-grid {
+body .contact-grid {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,89 +95,109 @@ body .welcome-section .logo {
   padding: 20px;
   margin-left: 44px;
 }
-.contact-grid .contact-item {
+body .contact-grid .contact-item {
   background: #f0f0f0;
   padding: 20px;
   text-align: center;
   width: 32%;
-  border-color: black;
-  border-style: solid;
+  border: solid black;
   border-radius: 10px;
 }
-
-.mp {
-  background-color: rgba(0, 0, 0, 0.486);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #ddd;
-}
-.mp h2 {
-  padding-top: 10px;
-}
-
-.location-hours {
+body .about-section,
+body .mp,
+body .location-hours {
   padding: 20px;
   background: #ddd;
   text-align: center;
+  border: solid black;
+  border-radius: 10px;
   width: 100%;
 }
-
+body .about-section {
+  margin-left: 25%;
+  width: 50%;
+}
+body .about-section p {
+  font-size: 20px;
+}
+body .mp {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.486);
+  justify-content: center;
+  align-items: center;
+  color: #ddd;
+}
+body .mp h2 {
+  padding-top: 10px;
+}
 @media (max-width: 600px) {
-  .services-grid, .technicians-grid, .contact-grid {
+  body .services-grid,
+  body .technicians-grid,
+  body .contact-grid {
     grid-template-columns: 1fr;
   }
 }
 @media (max-width: 500px) {
-  .welcome-section,
-  .services-grid,
-  .about-section,
-  .technicians-grid,
-  .contact-grid,
-  .mp,
-  .location-hours {
-    padding-left: 10px;
-    padding-right: 10px;
+  body .services-grid,
+  body .contact-grid {
+    margin-left: 0;
   }
-  .about-section {
-    margin-left: 8%;
+  body .about-section {
+    margin-left: 4%;
     width: 80%;
   }
-  .about-section p {
+  body .about-section p {
     font-size: 16px;
   }
-  .services-grid {
-    margin-left: 8%;
-  }
-  .services-grid .service-item,
-  .contact-grid .contact-item {
+  body .services-grid .service-item,
+  body .contact-grid .contact-item {
     margin-left: 0;
     width: auto;
   }
-  .contact-grid {
-    margin-left: 10%;
+  body .contact-grid {
+    margin-left: 4%;
   }
-  .social-links a {
+  body .social-links a {
     font-size: 20px;
   }
-  .welcome-section {
-    margin-left: 5%;
-    width: 80%;
+  body .location-hours,
+  body .mp {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  .location-hours {
-    width: 80%;
-    margin-left: 8%;
+  body .location-hours {
+    width: 100%;
   }
-  iframe {
+  body .logo,
+  body iframe {
+    height: 15vh;
+  }
+  body iframe {
     width: 300px;
     height: 300px;
     padding: 10px;
   }
-  .mp {
-    margin-left: 8%;
-    width: 80%;
+}
+@media (max-width: 400px) {
+  body iframe {
+    width: 250px;
+    height: 250px;
   }
-  .logo {
-    height: 15vh;
+  body .logo {
+    height: 20vh;
+    margin: 0;
+  }
+  body h1 {
+    font-size: 18px;
+    margin: 0;
+  }
+  body p {
+    font-size: smaller;
+  }
+}
+@media (max-width: 350px) {
+  body iframe {
+    width: 225px;
+    height: 225px;
   }
 }/*# sourceMappingURL=styles.css.map */

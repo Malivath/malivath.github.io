@@ -135,7 +135,7 @@ body {
             background: #f0f0f0;
             padding: 20px;
             text-align: center;
-            width: 25%;
+            width: 32%;
             border-color: black;
             border-style: solid;
             border-radius: $border-radius;
@@ -166,7 +166,9 @@ body {
     .services-grid, .technicians-grid, .contact-grid {
         grid-template-columns: 1fr;
     }
-}
+
+    }
+    
 
 @media (max-width: 500px) {
     .welcome-section,

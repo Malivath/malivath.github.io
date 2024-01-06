@@ -50,10 +50,16 @@
         <div class="contact-item">
             <h3>Phone Number</h3>
             <p>(218) 996-4994</p>
+            <h3>Call us any time between 9 am to 5pm monday through friday</h3>
         </div>
         <div class="contact-item">
-            <h3>Email</h3>
-            <p>info@acautomotive.com</p>
+            <h3>Contact Us</h3>
+            <form id="contactForm">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
     </div>
         <div class="mp">
@@ -70,7 +76,19 @@
     </div>
 
     <script>
-        // Your JavaScript for interactive elements here
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect the form data
+    var formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+    };
+    
+    // TODO: Send the formData to your server or service
+    console.log('Form data submitted: ', formData);
+});
     </script>
 </body>
 

@@ -6,42 +6,47 @@ body {
   margin: 0;
   padding: 0;
 }
-body h1 {
+
+h1 {
   font-family: "Racing Sans One", sans-serif;
   letter-spacing: 2px;
 }
-body h2 {
+
+h2 {
   font-family: "Racing Sans One", sans-serif;
   font-size: 32px;
 }
-body h3 {
+
+h3 {
   font-family: "Racing Sans One", sans-serif;
 }
-body .welcome-section {
+
+.welcome-section {
   position: relative;
   background-size: cover;
   text-align: center;
   color: white;
   width: 100%;
 }
-body .welcome-section .social-links {
+
+.welcome-section .social-links {
   position: absolute;
   top: 20px;
   right: 20px;
   padding: 40px;
 }
-body .welcome-section .social-links a {
+
+.welcome-section .social-links a {
   color: white;
   margin-left: 10px;
   font-size: 24px;
 }
-body .welcome-section .social-links a:hover {
+
+.welcome-section .social-links a:hover {
   color: #ddd;
 }
-body .welcome-section .location-hours {
-  width: 100%;
-}
-body .welcome-section .semi-transparent {
+
+.welcome-section .semi-transparent {
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -50,27 +55,15 @@ body .welcome-section .semi-transparent {
   padding: 20px;
   width: 100%;
 }
-body .welcome-section .logo {
+
+.welcome-section .logo {
   max-height: 25vh;
   position: static;
   display: flex;
   justify-content: center;
 }
-@media (max-width: 800px) {
-  body .welcome-section .social-links {
-    position: static;
-    display: flex;
-    justify-content: center;
-  }
-  body .welcome-section .social-links a {
-    color: rgb(247, 247, 247);
-    margin: 0 5px;
-  }
-  body .welcome-section .logo {
-    margin: 0 0 20px;
-  }
-}
-body .services-grid {
+
+.services-grid {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,138 +71,183 @@ body .services-grid {
   gap: 10px;
   padding: 20px;
 }
-body .services-grid .service-item {
+
+.services-grid .service-item {
   flex: 0 1 250px;
-  background: #f0f0f0;
+  background: rgba(240, 240, 240, 0.6117647059);
   padding: 20px;
   text-align: center;
   border: solid black;
   border-radius: 10px;
   margin-left: 40px;
 }
-body .technicians-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 20px;
-}
-body .technicians-grid .technician-item {
-  background: #fff;
-  padding: 20px;
-  text-align: center;
-  border-radius: 10px;
-}
-body .contact-grid {
+
+.contact-grid {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch; /* Ensures that the items stretch to fill the container */
   flex-wrap: wrap;
   gap: 10px;
   padding: 20px;
-  margin-left: 44px;
 }
-body .contact-grid .contact-item {
-  background: #f0f0f0;
+
+.contact-item {
+  background: rgba(240, 240, 240, 0.6117647059);
   padding: 20px;
   text-align: center;
-  width: 32%;
+  flex: 1; /* Each item will grow evenly */
+  min-width: 250px; /* Minimum width for smaller screens */
   border: solid black;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes space evenly */
 }
-body .about-section,
-body .mp,
-body .location-hours {
+
+.contact-item form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-item input,
+.contact-item textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-item button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-item button:hover {
+  background-color: #0056b3;
+}
+
+.about-section,
+.mp,
+.location-hours {
   padding: 20px;
-  background: #ddd;
+  background: rgba(240, 240, 240, 0.6117647059);
   text-align: center;
   border: solid black;
   border-radius: 10px;
   width: 100%;
 }
-body .about-section {
+
+.about-section {
   margin-left: 25%;
   width: 50%;
 }
-body .about-section p {
+
+.about-section p {
   font-size: 20px;
 }
-body .mp {
+
+.mp {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.486);
   justify-content: center;
   align-items: center;
   color: #ddd;
 }
-body .mp h2 {
+
+.mp h2 {
   padding-top: 10px;
 }
+
+.location-hours {
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 800px) {
+  .welcome-section .social-links {
+    position: static;
+    display: flex;
+    justify-content: center;
+  }
+  .welcome-section .social-links a {
+    color: rgb(247, 247, 247);
+    margin: 0 5px;
+  }
+  .welcome-section .logo {
+    margin: 0 0 20px;
+  }
+}
 @media (max-width: 600px) {
-  body .services-grid,
-  body .technicians-grid,
-  body .contact-grid {
+  .services-grid,
+  .technicians-grid,
+  .contact-grid {
     grid-template-columns: 1fr;
   }
 }
 @media (max-width: 500px) {
-  body .services-grid,
-  body .contact-grid {
+  .services-grid,
+  .contact-grid {
     margin-left: 0;
   }
-  body .about-section {
+  .about-section {
     margin-left: 4%;
     width: 80%;
   }
-  body .about-section p {
+  .about-section p {
     font-size: 16px;
   }
-  body .services-grid .service-item,
-  body .contact-grid .contact-item {
+  .services-grid .service-item,
+  .contact-grid .contact-item {
     margin-left: 0;
     width: auto;
   }
-  body .contact-grid {
+  .contact-grid {
     margin-left: 4%;
   }
-  body .social-links a {
+  .social-links a {
     font-size: 20px;
   }
-  body .location-hours,
-  body .mp {
+  .location-hours,
+  .mp {
     padding-left: 10px;
     padding-right: 10px;
   }
-  body .location-hours {
-    width: 100%;
-  }
-  body .logo,
-  body iframe {
+  .logo,
+  iframe {
     height: 15vh;
   }
-  body iframe {
+  iframe {
     width: 300px;
     height: 300px;
     padding: 10px;
   }
 }
 @media (max-width: 400px) {
-  body iframe {
+  iframe {
     width: 250px;
     height: 250px;
   }
-  body .logo {
+  .logo {
     height: 20vh;
     margin: 0;
+    margin-right: 35px;
   }
-  body h1 {
+  h1 {
     font-size: 18px;
     margin: 0;
+    margin-right: 25px;
   }
-  body p {
+  p {
     font-size: smaller;
   }
 }
 @media (max-width: 350px) {
-  body iframe {
+  iframe {
     width: 225px;
     height: 225px;
   }

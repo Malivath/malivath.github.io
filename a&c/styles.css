@@ -1,8 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Ops+One&family=Bungee+Inline&family=Permanent+Marker&family=Racing+Sans+One&family=Roboto:wght@100&family=Rye&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Ops+One&family=Bungee+Inline&family=Patua+One&family=Permanent+Marker&family=Racing+Sans+One&family=Roboto:wght@100&family=Rye&family=Salsa&family=Stardos+Stencil&family=Tillana&display=swap");
 body {
   background-image: url("images/bg4k.jpeg");
-  font-family: Arial, sans-serif;
+  font-family: "Patua One", serif;
   margin: 0;
   padding: 0;
+}
+body h1 {
+  font-family: "Racing Sans One", sans-serif;
+  letter-spacing: 2px;
+}
+body h2 {
+  font-family: "Racing Sans One", sans-serif;
+  font-size: 32px;
+}
+body h3 {
+  font-family: "Racing Sans One", sans-serif;
 }
 body .welcome-section {
   position: relative;
@@ -50,7 +63,7 @@ body .welcome-section .logo {
     justify-content: center;
   }
   body .welcome-section .social-links a {
-    color: rgb(0, 29, 110);
+    color: rgb(247, 247, 247);
     margin: 0 5px;
   }
   body .welcome-section .logo {

@@ -31,22 +31,22 @@ h1 {
     @include text-gradient;
     display: inline-block; // Required for gradient clipping
     // Fallback color already included in mixin
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.276);
 }
 
 h2 {
     font-family: 'Racing Sans One', sans-serif;
     font-size: 32px;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 h3 {
     font-family: 'Racing Sans One', sans-serif;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 p {
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .welcome-section {
@@ -205,9 +205,10 @@ p {
     padding-top: 10px;
     letter-spacing: 2px;
     @include text-gradient;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
-
+p{
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
 }
 
 .location-hours {

@@ -1,5 +1,5 @@
-$divcolor-color: rgba(0, 0, 0, 0.5);
-$back-color: #f0f0f09c;
+$divcolor-color: rgb(6, 0, 87);
+$back-color: #0004ff7d;
 $border-radius: 10px;
 // Define variables
 $font-stack: 'Racing Sans One', sans-serif;
@@ -20,6 +20,8 @@ $gradient-end: #CD7F32; // Bronze color
 
 body {
     background-image: url('images/bg4k.jpeg');
+    background-attachment: fixed;  /* This will make the background image fixed */
+    background-size: cover;        /* This ensures the background covers the whole area */
     font-family: 'Patua One', serif;
     margin: 0;
     padding: 0;
@@ -36,17 +38,21 @@ h1 {
 
 h2 {
     font-family: 'Racing Sans One', sans-serif;
+    @include text-gradient;
     font-size: 32px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 h3 {
+    @include text-gradient;
     font-family: 'Racing Sans One', sans-serif;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 p {
+    color: #7a7a7a; /* Sets the text color to a medium gray */
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+
 }
 
 .welcome-section {
@@ -67,7 +73,7 @@ p {
 
 
 .welcome-section .social-links a {
-    color: white;
+    color: rgb(255, 255, 255);
     margin-left: 10px;
     font-size: 24px;
 }
@@ -104,16 +110,21 @@ p {
     flex-wrap: wrap;
     gap: 10px;
     padding: 20px;
-}
 
-.services-grid .service-item {
-    flex: 0 1 250px;
-    background: $back-color;
-    padding: 20px;
-    text-align: center;
-    border: solid black;
-    border-radius: $border-radius;
-    margin-left: 40px;
+    .service-item {
+        flex: 0 1 250px;
+        background: $divcolor-color;
+        padding: 20px;
+        text-align: center;
+        border: solid black;
+        border-radius: $border-radius;
+        margin-left: 40px;
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+    }
 }
 
 .contact-grid {
@@ -126,7 +137,7 @@ p {
 }
 
 .contact-item {
-    background: $back-color;
+    background: $divcolor-color;
     padding: 20px;
     text-align: center;
     flex: 1; /* Each item will grow evenly */
@@ -140,6 +151,9 @@ p {
     p{
         font-size: 18px;
         
+    }
+    label{
+        @include text-gradient;
     }
 }
 
@@ -155,7 +169,7 @@ p {
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    
+
 }
 
 .contact-item button {
@@ -176,7 +190,7 @@ p {
 .mp,
 .location-hours {
     padding: 20px;
-    background: $back-color;
+    background: $divcolor-color;
     text-align: center;
     border: solid black;
     border-radius: $border-radius;
@@ -221,16 +235,18 @@ p{
         position: static;
         display: flex;
         justify-content: center;
+        
     }
 
     .welcome-section .social-links a {
-        color: rgb(247, 247, 247);
+        color: rgb(0, 101, 184);
         margin: 0 5px;
     }
 
     .welcome-section .logo {
         margin: 0 0 20px;
     }
+    
 }
 
 @media (max-width: 600px) {

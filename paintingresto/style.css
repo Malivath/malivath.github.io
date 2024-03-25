@@ -154,7 +154,7 @@ textarea {
 
 /* Media query for devices smaller than 600px */
 @media only screen and (max-width: 600px) {
-    .contact-item {
+    body {
         margin-bottom: 25%;
     }
 }

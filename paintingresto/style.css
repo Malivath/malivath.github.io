@@ -142,7 +142,6 @@ textarea {
     left: 0;
     bottom: 0;
     width: 100%;
-    position: fixed;
 }
 
 .about-section, .services, .contact-item {
@@ -152,9 +151,3 @@ textarea {
     border-radius: 10px; /* rounded corners */
 }
 
-/* Media query for devices smaller than 600px */
-@media only screen and (max-width: 600px) {
-    body {
-        margin-bottom: 25%;
-    }
-}

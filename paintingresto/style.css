@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(./public/1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #F5F5DC;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(to right, #5a361192, #1c5a20a2);
+    color: #F5F5DC;
+    /* beige */
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.content {
+    margin: 20px;
+}
+
+/* Style the navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+    float: left;
+    display: block;
+    color: #F5F5DC;
+    /* beige */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+    background-color: #228B22;
+    /* forest green */
+    color: #F5F5DC;
+}
+
+.about-section {
+    text-align: center;
+    padding: 10px;
+    background-color: #333333af;
+    font-size: larger;
+}
+
+.services {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333333af;
+    font-size: larger;
+}
+
+.services ul {
+    list-style-type: square;
+    /* Removes the bullet points */
+    padding: 0;
+    /* Removes the padding */
+}
+
+
+
+.contact-item {
+    font-size: larger;
+    text-align: center;
+    padding: 10px;
+    background-color: #333333bf;
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.contact-item form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-item label {
+    margin-top: 10px;
+}
+
+.contact-item input, .contact-item textarea {
+    margin-top: 5px;
+    width: 80%; /* You can adjust this value */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+input[type="email"] {
+    width: 15rem; /* Adjust this value as needed */
+    text-align: center;
+}
+
+.contact-item button {
+    padding: 10px 30px; /* Increase padding to make the button larger */
+    font-size: 16px; /* Increase font size */
+    background-color: #228B22; /* forest green */
+    color: #F5F5DC; /* beige */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.contact-item button:hover {
+    background-color: #5a3511; /* saddle brown */
+}
+
+
+textarea {
+    text-align: center;
+}
+
+
+
+
+
+.footer {
+    background: linear-gradient(to right, #5a3511, #1c5a20);
+    color: #F5F5DC;
+    /* beige */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.about-section, .services, .contact-item {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #5a3511; /* saddle brown */
+    border-radius: 10px; /* rounded corners */
+}

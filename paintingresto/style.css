@@ -84,7 +84,7 @@ h1 {
     padding: 10px;
     background-color: #333333bf;
     margin-top: 1%;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
 .contact-item form {
@@ -139,10 +139,10 @@ textarea {
     /* beige */
     text-align: center;
     padding: 10px;
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    position: fixed;
 }
 
 .about-section, .services, .contact-item {

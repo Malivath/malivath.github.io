@@ -62,7 +62,7 @@ h1 {
     padding: 10px;
     background-color: #333333af;
     font-size: larger;
-    width: 76%;
+    width: 70%;
     margin: auto;
 }
 
@@ -93,7 +93,7 @@ h1 {
     padding: 10px;
     background-color: #333333bf;
 
-    width: 76%;
+    width: 70%;
     margin: auto;  
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -143,10 +143,6 @@ textarea {
     text-align: center;
 }
 
-
-
-
-
 .footer {
     background: linear-gradient(to right, #5a3511, #1c5a20);
     color: #F5F5DC;
@@ -158,7 +154,7 @@ textarea {
     width: 100%;
 }
 
-.about-section, .services, .contact-item {
+.about-section, .services, .contact-item, .navbar{
     border-width: 2px;
     border-style: solid;
     border-color: #5a3511; /* saddle brown */
@@ -182,6 +178,13 @@ margin-top: 2rem;
 @media screen and (max-width: 1000px) {
     .header {margin-top: 3rem;
     }
+    #contact:target {
+        margin-top: 4rem;
+        } 
+        
+        #about:target {
+            margin-top:  2rem;
+        }
 }
 
 /* CSS for screens smaller than 700px */
@@ -189,19 +192,30 @@ margin-top: 2rem;
     .header {
         margin-top: 3.5rem;
     }
+    .navbar {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4.7rem; /* Adjust as needed */
+        overflow: auto;
+        height: 13rem;
+    }
+
     .navbar a {
         display: block;
         text-align: center;
-        padding: 15px; /* Increase padding to make links larger */
-        font-size: 20px; /* Increase font size for better readability */
+        padding: 13px; /* Increase padding to make links larger */
+        font-size: 12px; /* Increase font size for better readability */
     }
-    .about-section{margin-top: 2rem;}
     .contact-item{
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
+
+    
 }
 
-@media screen and (max-width: 390px){
+/* @media screen and (max-width: 390px){
 .navbar a {
     font-size: 12px;
 }
@@ -215,4 +229,5 @@ margin-top: 4rem;}
 .header{
     margin-top: 5rem;
 }
-}
+} */
+

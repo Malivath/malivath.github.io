@@ -13,7 +13,6 @@ body {
 }
 
 .header {
-    margin-top: 2%;
     text-align: center;
     padding: 10px;
     background: linear-gradient(to right, #5a361192, #1c5a20a2);
@@ -34,10 +33,15 @@ h1 {
 .navbar {
     z-index: 1;
     position: fixed;
-    top: 0;
-    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5rem; /* Adjust as needed */
+    overflow: auto;
+    height: 14rem;
     overflow: hidden;
     background-color: #333;
+    margin-left: 1.5px;
 }
 
 /* Style the navigation bar links */
@@ -97,7 +101,7 @@ h1 {
     width: 70%;
     margin: auto;  
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .contact-item form {
@@ -193,22 +197,7 @@ margin-top: 2rem;
     .header {
         margin-top: 3.5rem;
     }
-    .navbar {
-        position: fixed;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4.7rem; /* Adjust as needed */
-        overflow: auto;
-        height: 13rem;
-    }
 
-    .navbar a {
-        display: block;
-        text-align: center;
-        padding: 13px; /* Increase padding to make links larger */
-        font-size: 12px; /* Increase font size for better readability */
-    }
     .contact-item{
         margin-bottom: 3rem;
     }
@@ -224,19 +213,10 @@ margin-top: 2rem;
     
 }
 
-/* @media screen and (max-width: 390px){
-.navbar a {
-    font-size: 12px;
+@media screen and (max-width: 390px){
+    #about:target, #services:target, #contact:target {
+        transform: translateX(15%); /* Move the section 10% to the left */
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+    }
 }
-.contact-item{
-    width: 90%;
-
-}
-
-.about-section, .services{
-margin-top: 4rem;}
-.header{
-    margin-top: 5rem;
-}
-} */
 

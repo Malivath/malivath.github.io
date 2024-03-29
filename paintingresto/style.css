@@ -32,6 +32,7 @@ h1 {
 
 /* Style the navigation bar */
 .navbar {
+    z-index: 1;
     position: fixed;
     top: 0;
     width: 100%;
@@ -211,6 +212,14 @@ margin-top: 2rem;
     .contact-item{
         margin-bottom: 3rem;
     }
+
+@media screen and (max-width: 600px) {
+    /* Style for the About Us, Services, and Contact sections when they're targeted */
+    #about:target, #services:target, #contact:target {
+        transform: translateX(10%); /* Move the section 10% to the left */
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+    }
+}
 
     
 }

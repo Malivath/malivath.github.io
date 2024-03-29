@@ -62,7 +62,7 @@ h1 {
     padding: 10px;
     background-color: #333333af;
     font-size: larger;
-    width: 75%;
+    width: 76%;
     margin: auto;
 }
 
@@ -73,7 +73,7 @@ h1 {
     align-items: center;
     background-color: #333333af;
     font-size: larger;
-    width: 30%;
+    width: 12rem;
     margin: auto;
     margin-top: 1rem;
 }
@@ -93,7 +93,7 @@ h1 {
     padding: 10px;
     background-color: #333333bf;
 
-    width: 75%;
+    width: 76%;
     margin: auto;  
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -175,4 +175,38 @@ margin-top: 2rem;
 
 #about:target {
     margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .header {margin-top: 3rem;
+    }
+}
+
+/* CSS for screens smaller than 700px */
+@media screen and (max-width: 700px) {
+    .header {
+        margin-top: 3.5rem;
+    }
+    .navbar a {
+        display: block;
+        text-align: center;
+        padding: 15px; /* Increase padding to make links larger */
+        font-size: 20px; /* Increase font size for better readability */
+    }
+    .about-section{margin-top: 2rem;}
+    .contact-item{
+        margin-bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 390px){
+.navbar a {
+    font-size: 12px;
+}
+.contact-item,{
+    width: 90%;
+}
+.about-section, .services{
+margin-top: 4rem;}
+
 }

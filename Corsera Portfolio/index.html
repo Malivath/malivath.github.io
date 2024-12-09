@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" id="light-mode"> 
+    <link rel="stylesheet" href="dark-styles.css" id="dark-mode" disabled>
+</head>
+<body>
+    <header>
+        <div class="menu-icon" aria-label="Menu">&#9776;</div>
+        <div class="dropdown-menu" aria-labelledby="menu-icon">
+            <a href="#">Menu Item 1</a>
+            <a href="#">Menu Item 2</a>
+            <a href="#">Menu Item 3</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about-me">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="mode-toggle">Toggle Dark Mode</button>
+    </header>
+    
+    <main>
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>
+                Hi, I'm Matthew Fuller, a front-end developer with a passion for creating beautiful and functional websites. 
+                While my primary focus is on front-end development, I have a working knowledge of some backend technologies. 
+                However, I wouldn't consider myself a backend developer just yet. I was already familiar with front-end 
+                technologies before taking this course, but I'm currently enrolled in the Microsoft Front-End Developer 
+                course to build credibility in the field. Additionally, I'm taking the Meta Database Engineering course to 
+                deepen my understanding of databases. Driven by curiosity, I thoroughly enjoy learning and exploring new technologies.
+            </p>
+            
+        </section>
+        
+        <section id="projects">
+            <h2 id="projectsH2">Projects</h2>
+<article>
+    <figure>
+        <img src="./public/Automotive.png" alt="Screenshot of Project 1" style="width: 50%;">
+        <figcaption>Project 1 - Description</figcaption>
+    </figure>
+    <a href="https://malivath.github.io/a&c/index.html">Automotive Project</a>
+</article>
+<article>
+    <figure>
+        <img src="./public/Logging.png" alt="Screenshot of Project 2" style="width: 50%;">
+        <figcaption>Project 2 - Description</figcaption>
+    </figure>
+    <a href="https://malivath.github.io/paintingresto/index.html">Logging Project</a>
+</article>
+
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li><i class="fab fa-html5" aria-hidden="true"></i> HTML</li>
+                <li><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS</li>
+                <li><i class="fab fa-js" aria-hidden="true"></i> JavaScript</li>
+                <li><i class="fab fa-react" aria-hidden="true"></i> React</li>
+                <li><i class="fab fa-git-alt" aria-hidden="true"></i> Git</li>
+                <li><i class="fas fa-code" aria-hidden="true"></i> C#</li>
+                <li><i class="fas fa-cubes" aria-hidden="true"></i> Unity</li>
+                <li><i class="fab fa-python" aria-hidden="true"></i> Python</li>
+                <li><i class="fab fa-google" aria-hidden="true"></i> IT Support</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <form id="contactForm" action="https://formspree.io/f/xwkgkzvl" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required aria-required="true">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required aria-required="true">
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required aria-required="true"></textarea>
+                
+                <button type="submit">Send</button>
+                <p>This form uses Formspree to send submissions directly to my email address.</p>
+            </form>
+            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Matthew Fuller. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

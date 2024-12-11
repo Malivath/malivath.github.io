@@ -116,6 +116,51 @@ h2 {
     color: #ffffff;
 }
 
+/* Specific Icon Colors */
+.html i {
+    color: #E34F26; /* HTML5 Orange */
+}
+
+.css i {
+    color: #1572B6; /* CSS3 Blue */
+}
+
+.javascript i {
+    color: #F7DF1E; /* JavaScript Yellow */
+}
+
+.react i {
+    color: #61DAFB; /* React Blue */
+}
+
+.git i {
+    color: #F05032; /* Git Orange */
+}
+
+.csharp i {
+    color: #178600; /* C# Green */
+}
+
+.unity i {
+    color: #000000; /* Unity Black */
+}
+
+.python i {
+    color: #3776AB; /* Python Blue */
+}
+
+.bootstrap i {
+    color: #7952B3; /* Bootstrap Purple */
+}
+
+.nodejs i {
+    color: #339933; /* Node.js Green */
+}
+
+.google i {
+    color: #4285F4; /* Google Blue */
+}
+
 /* Contact Section */
 #contact form {
     display: flex;

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa:wght@300..700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Gloria+Hallelujah&family=Lilita+One&family=Nosifer&family=Yuji+Mai&display=swap');
 @import url('keyframe-light.css');
 @import url('button.css');
+@import url('icons.css');
 
 /* General Styles */
 body {
@@ -16,12 +17,28 @@ body {
 /* Header Styles */
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #333;
     padding: 10px 20px;
     color: #fff;
 }
+
+header nav {
+    flex-grow: 1;
+}
+
+button#mode-toggle {
+    margin-left: auto; /* Push the button to the far right */
+}
+
+@media (max-width: 768px) {
+    button#mode-toggle {
+        font-size: 14px; /* Shrink the button text on smaller screens */
+        padding: 5px 10px; /* Adjust padding for smaller screens */
+    }
+}
+
 
 header div, header nav ul {
     display: flex;
@@ -115,50 +132,6 @@ h2 {
     display: inline-block;
 }
 
-/* Specific Icon Colors */
-.html i {
-    color: #E34F26; /* HTML5 Orange */
-}
-
-.css i {
-    color: #1572B6; /* CSS3 Blue */
-}
-
-.javascript i {
-    color: #dec81e; /* JavaScript Yellow */
-}
-
-.react i {
-    color: #61DAFB; /* React Blue */
-}
-
-.git i {
-    color: #F05032; /* Git Orange */
-}
-
-.csharp i {
-    color: #178600; /* C# Green */
-}
-
-.unity i {
-    color: #000000; /* Unity Black */
-}
-
-.python i {
-    color: #3776AB; /* Python Blue */
-}
-
-.bootstrap i {
-    color: #7952B3; /* Bootstrap Purple */
-}
-
-.nodejs i {
-    color: #339933; /* Node.js Green */
-}
-
-.google i {
-    color: #4285F4; /* Google Blue */
-}
 
 /* Contact Section */
 #contact form {
@@ -288,4 +261,54 @@ ul li:hover {
 ul li i {
     margin-right: 10px;
     font-size: 1.5em;
+}
+
+h1 {
+    font-family: "Gloria Hallelujah", cursive;
+    animation: animateYellow 5s linear infinite;
+    user-select: none;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px #000000;
+    text-align: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #000);
+    line-height: 0.80em;
+    outline: none;
+    margin-bottom: 40px;
+    margin-top: 15px;
+}
+
+
+
+/* Add these styles to your existing CSS */
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul.nav-items {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .menu-icon.active + nav ul, nav ul.visible {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-icon {
+        display: none;
+    }
+
+    nav ul.nav-items {
+        display: flex;
+    }
+    
 }

@@ -300,6 +300,10 @@ h1 {
     nav ul li {
         margin: 10px 0;
     }
+    h1{
+
+        font-size: 2em;
+    }
 }
 
 @media (min-width: 769px) {

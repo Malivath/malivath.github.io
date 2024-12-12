@@ -1,7 +1,7 @@
 /* Importing Fonts and Keyframes */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa:wght@300..700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Lilita+One&family=Nosifer&family=Yuji+Mai&display=swap');
 @import url('keyframe-dark.css');
-
+@import url('dark-button.css');
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
@@ -185,17 +185,12 @@ h2 {
 }
 
 #contact button {
-    padding: 10px;
-    background-color: #555555;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+margin-top: 15px;
+background-color: #424242;
 }
 
 #contact button:hover {
-    background-color: #777777;
+    background-color: #4e4e4e;
 }
 
 /* Footer Styles */

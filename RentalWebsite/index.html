@@ -3,111 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lee's Rental Company</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Lees Rental and Commercial Development</title>
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
-    <div id="content" class="container content">
-        <div class="header">
-            <h1 id="no-highlight">Lees Rental Company</h1>
-            <p id="no-highlight">"One building at a time"</p>
-            
+    <header id="header">
+        <h1 id="no-highlight">Lees Rental Company</h1>
+        <p id="no-highlight" class="motto">"One Building at a Time"</p>
+    </header>
+    <div id="container">
+        <div id="sidebar">
+            <p class="highlight-text">Click links to check for availability.</p>
+            <div class="image-container">
+                <p><a href="Residential.html" target="_blank">Residential</a></p>
+                <img src="./Public/landing/image1.png" alt="Apartment Complex">
+            </div>
+
+            <p><a href="Residential.html" target="_self">Lees Rental Company</a></p>
+            <p><a href="Application.html" target="_self">Apartment Application</a></p>
+            <p><a href="Commercial.html" target="_self">Commercial</a></p>
         </div>
-        <div class="office-address">
-            <p>Office Address: 1810 East Third Avenue, Hibbing, MN 55746</p>
-        </div>
-        <button onclick="scrollToFooter()" class="btn btn-primary">Contact</button>
-        <div class="properties">
-            <h2>Our Properties</h2>
-            <div class="property">
-                <a class="image280" href="401eastHoward.html" target="_self">
-                    <img src="./Public/image0.png" alt="Property at 401 East Howard">
-                    Property at 401 East Howard
-                </a>
+        <div id="main">
+
+            <p id="no-highlight" class="tagline"><em>Andrew Mason Lees Building</em></p>
+            <div class="image-container">
+                <img src="./Public/landing/image0.png" alt="Lees Rental Company Building">
             </div>
-            <div class="property">
-                <a class="image430" href="1612east.html" target="_self">
-                    <img src="./Public/image430.png" alt="Property at 1612 East">
-                    Property at 1612 East
-                </a>
-            </div>
-            <div class="property">
-                <a class="image443" href="1606.html" target="_self">
-                    <img src="./Public/image443.png" alt="Property at 1606">
-                    Property at 1606
-                </a>
-            </div>
-            <div class="property">
-                <a class="image445" href="1325.html" target="_self">
-                    <img src="./Public/image445.png" alt="Property at 1325">
-                    Property at 1325
-                </a>
-            </div>
-            <div class="property">
-                <a class="image446" href="2303.html" target="_self">
-                    <img src="./Public/image446.png" alt="Property at 2303">
-                    Property at 2303
-                </a>
-            </div>
-            <div class="property">
-                <a class="image448" href="202.html" target="_self">
-                    <img src="./Public/image448.png" alt="Property at 202">
-                    Property at 202
-                </a>
-            </div>
-            <div class="property">
-                <a class="image449" href="1801.html" target="_self">
-                    <img src="./Public/image449.png" alt="Property at 1801">
-                    Property at 1801
-                </a>
-            </div>
-            <div class="property">
-                <a class="image451" href="1936.html" target="_self">
-                    <img src="./Public/image451.png" alt="Property at 1936">
-                    Property at 1936
-                </a>
-            </div>
-            <div class="property">
-                <a class="image455" href="1809.html" target="_self">
-                    <img src="./Public/image455.png" alt="Property at 1809">
-                    Property at 1809
-                </a>
-            </div>
-            <div class="property">
-                <a class="image458" href="3131.html" target="_self">
-                    <img src="./Public/image458.png" alt="Property at 3131 Copy">
-                    Property at 3131
-                </a>
-            </div>
-            <div class="property">
-                <a class="image459" href="1813.html" target="_self">
-                    <img src="./Public/image459.png" alt="Property at 1813">
-                    Property at 1813
-                </a>
-            </div>
-            <div class="property">
-                <a class="image460" href="3612.html" target="_self">
-                    <img src="./Public/image460.png" alt="Property at 3612">
-                    Property at 3612
-                </a>
-            </div>
-            <div class="property">
-                <a class="image461" href="3006.html" target="_self">
-                    <img src="./Public/image461.png" alt="Property at 3006">
-                    Property at 3006
-                </a>
-            </div>
-        </div>
-        <div id="contact" class="contact-info">
-            <p>Contact us at: 1(218) 969-1586</p>
-            <p>Email: <a href="mailto:A1refrig@mchsi.com">A1refrig@mchsi.com</a></p>
+            <p>For more information or to schedule a private showing, call Rich at (218) 969 1586. Thanks</p>
         </div>
     </div>
-    <script>
-        function scrollToFooter() {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+    <div id="history">
+        <p>Lees Rental and Commercial Development was established in 1991 when we purchased our first building that houses our sister company, A-1 refrigeration of Hibbing Inc. Today it has grown to over two hundred apartments starting at $375 a month and over one hundred commercial spaces starting at $150 per month.</p>
+    </div>
+    <div id="contact">
+        <p>Contact us at <a href="tel:12189691586">1(218) 969.1586</a></p>
+        <p class="strong-text">Email: <a href="mailto:A1refrig@mchsi.com">A1refrig@mchsi.com</a></p>
+    </div>
 </body>
 </html>

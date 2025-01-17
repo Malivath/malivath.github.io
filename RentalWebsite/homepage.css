@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Agu+Display&family=Bebas+Neue&family=Comfortaa:wght@300..700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Gloria+Hallelujah&family=Lilita+One&family=Nosifer&family=Yuji+Mai&display=swap');
+
+body {
+    font-family: "Alumni Sans Collegiate One", serif;
+    font-style: normal;
+    font-size: 1.1em;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #000;
+    text-align: center;
+    padding: 20px 0;
+}
+header h1 {
+    margin: 0;
+    font-size: 3em;
+}
+header .motto {
+    color: #F0E68C;
+    margin: 5px 0;
+}
+#container {
+    display: flex;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+#sidebar {
+    flex: 1;
+    margin-right: 20px;
+}
+#main {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#contact {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+a {
+    color: #d3d3d3; /* Light gray */
+    text-decoration: underline; /* Underline to indicate links */
+    border-bottom: none; /* Remove the border-bottom property */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+a:hover {
+    color: #fff; /* White on hover for better visibility */
+}
+
+.highlight-text {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.tagline {
+    color: #F0E68C;
+    font-style: italic;
+}
+strong-text {
+    font-weight: bold;
+}
+.image-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.image-container img {
+    max-width: 90%;
+    border-radius: 10px;
+}
+#history {
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+#history p {
+    text-align: justify;
+}
+@media (max-width: 820px) {
+    #history {
+        max-width: calc(75vw - 20px); /* 10px padding on each side */
+    }
+    #container{
+        background-color: #323232;
+    }
+    
+}
+
+
+#no-highlight {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Non-prefixed version, currently supported by most browsers */
+}

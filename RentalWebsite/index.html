@@ -10,12 +10,14 @@
 <body>
     <div id="content" class="container content">
         <div class="header">
-            <h1>Lees Rental Company</h1>
-            <p>"One building at a time"</p>
+            <h1 id="no-highlight">Lees Rental Company</h1>
+            <p id="no-highlight">"One building at a time"</p>
+            
         </div>
         <div class="office-address">
             <p>Office Address: 1810 East Third Avenue, Hibbing, MN 55746</p>
         </div>
+        <button onclick="scrollToFooter()" class="btn btn-primary">Contact</button>
         <div class="properties">
             <h2>Our Properties</h2>
             <div class="property">
@@ -97,10 +99,15 @@
                 </a>
             </div>
         </div>
-        <div class="contact-info">
+        <div id="contact" class="contact-info">
             <p>Contact us at: 1(218) 969-1586</p>
             <p>Email: <a href="mailto:A1refrig@mchsi.com">A1refrig@mchsi.com</a></p>
         </div>
     </div>
+    <script>
+        function scrollToFooter() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>

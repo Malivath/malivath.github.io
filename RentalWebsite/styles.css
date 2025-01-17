@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Agu+Display&family=Bebas+Neue&family=Comfortaa:wght@300..700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Gloria+Hallelujah&family=Lilita+One&family=Nosifer&family=Yuji+Mai&display=swap');
 
 
+
 body {
     font-family: "Alumni Sans Collegiate One", serif;
     font-weight: 400;
@@ -24,6 +25,7 @@ body {
 }
 
 .header h1 {
+    
     margin-top: 20px;
     color: white;
     font-size: 2.5em;
@@ -57,4 +59,11 @@ body {
     border: 1px solid #fff;
     display: block;
     margin: 0 auto 10px;
+}
+
+#no-highlight {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Non-prefixed version, currently supported by most browsers */
 }

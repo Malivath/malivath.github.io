@@ -12,7 +12,6 @@ header {
     position: relative;
     text-align: center;
     margin-bottom: 20px;
-
 }
 
 .header-content {
@@ -79,10 +78,80 @@ header h1 {
     }
 }
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     header h1 {
         font-size: 2em;
     }
-    } 
-    
+}
 
+/* Carousel styles */
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.carousel {
+    position: relative;
+    width: 80%; /* Set carousel width */
+    max-width: 400px; /* Set max width */
+    height: auto; /* Allow height to adjust based on content */
+    overflow: hidden;
+    border: 2px solid #ccc; /* Add border */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensures the entire image fits within the container */
+    display: none;
+}
+
+.carousel img.active {
+    display: block;
+}
+
+.carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-buttons button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.carousel-thumbnails img {
+    width: 60px;
+    height: 60px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+.carousel-thumbnails img.active-thumbnail {
+    border-color: #40556c; /* Highlight active thumbnail */
+}

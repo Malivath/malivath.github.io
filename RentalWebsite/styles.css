@@ -33,6 +33,31 @@ body {
 
 }
 
+h2 {
+    margin-top: 5px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+                 0 0 30px rgba(255, 255, 255, 0.75), 
+                 0 0 45px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+                     0 0 30px rgba(255, 255, 255, 0.75), 
+                     0 0 45px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(255, 255, 255, 1), 
+                     0 0 50px rgba(255, 255, 255, 0.75), 
+                     0 0 75px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+                     0 0 30px rgba(255, 255, 255, 0.75), 
+                     0 0 45px rgba(255, 255, 255, 0.5);
+    }
+}
 
 
 
@@ -54,12 +79,37 @@ body {
 }
 
 .property img {
+    border-radius: 10px;
     width: 300px;
     height: 300px;
     border: 1px solid #fff;
     display: block;
     margin: 0 auto 10px;
+    box-shadow: 0 0 9.56px rgba(255, 255, 255, 1), 
+                0 0 19.13px rgba(255, 255, 255, 0.75), 
+                0 0 28.69px rgba(255, 255, 255, 0.5);
+    animation: boxPulse 2s infinite;
 }
+
+@keyframes boxPulse {
+    0% {
+        box-shadow: 0 0 9.56px rgba(255, 255, 255, 1), 
+                    0 0 19.13px rgba(255, 255, 255, 0.75), 
+                    0 0 28.69px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 15.94px rgba(255, 255, 255, 1), 
+                    0 0 31.88px rgba(255, 255, 255, 0.75), 
+                    0 0 47.81px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 9.56px rgba(255, 255, 255, 1), 
+                    0 0 19.13px rgba(255, 255, 255, 0.75), 
+                    0 0 28.69px rgba(255, 255, 255, 0.5);
+    }
+}
+
+
 
 #no-highlight {
     -webkit-user-select: none; /* Chrome, Safari, Opera */

@@ -24,6 +24,16 @@ body {
     text-shadow: 6px 6px 15px rgba(0, 0, 0, 1); /* Increased opacity to 1 for a fully dark shadow */
 }
 
+.header0 {
+    text-align: center;
+    background-image: url('./Public/Commercial/handshake.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    color: #ffffff;
+    text-shadow: 6px 6px 15px rgba(0, 0, 0, 1); /* Increased opacity to 1 for a fully dark shadow */
+}
+
 .header h1 {
     
     margin-top: 20px;

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3006 East 2nd Ave Apt. 2</title>
+    <link rel="stylesheet" href="/RentalWebsite/styles2.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/RentalWebsite/index.html" class="home-button">Home</a>
+            <img src="/RentalWebsite/Public/Commercial/Properties/HeatedStorage/image1.png" alt="Header Image">
+            <h1>Lees Rental Company Residential</h1>
+        </div>
+    </header>
+    <div class="property-info">
+        <p><strong>Address:</strong> 3006 East 2nd Ave Apt. 2</p>
+        <p><strong>Bedrooms:</strong> 3</p>
+        <p><strong>Utilities Included:</strong> All</p>
+        <p><strong>Price:</strong> $1337</p>
+    </div>
+    <div class="carousel-container">
+        <div class="carousel">
+            <img src="/RentalWebsite/Public/Commercial/Properties/MiniStorage/image0.png" alt="No Photo Available" class="active">
+            <img src="/RentalWebsite/Public/Commercial/Properties/MiniStorage/image1.png" alt="Another Photo">
+            <div class="carousel-buttons">
+                <button onclick="prevSlide(0)">&#10094;</button>
+                <button onclick="nextSlide(0)">&#10095;</button>
+            </div>
+        </div>
+        <div class="carousel-thumbnails">
+            <img src="/RentalWebsite/Public/Commercial/Properties/MiniStorage/image0.png"  alt="No Photo Available" onclick="jumpToSlide(0, 0)">
+            <img src="/RentalWebsite/Public/Commercial/Properties/MiniStorage/image1.png"  alt="Another Photo" onclick="jumpToSlide(0, 1)">
+        </div>
+    </div>
+    <script>
+        let currentSlides = [0];
+        const carousels = document.querySelectorAll('.carousel');
+        const thumbnails = document.querySelectorAll('.carousel-thumbnails img');
+
+        function showSlide(carouselIndex, slideIndex) {
+            const slides = carousels[carouselIndex].querySelectorAll('img');
+            const thumbs = carousels[carouselIndex].nextElementSibling.querySelectorAll('img');
+
+            slides[currentSlides[carouselIndex]].classList.remove('active');
+            thumbs[currentSlides[carouselIndex]].classList.remove('active-thumbnail');
+
+            currentSlides[carouselIndex] = (slideIndex + slides.length) % slides.length;
+
+            slides[currentSlides[carouselIndex]].classList.add('active');
+            thumbs[currentSlides[carouselIndex]].classList.add('active-thumbnail');
+        }
+
+        function nextSlide(carouselIndex) {
+            showSlide(carouselIndex, currentSlides[carouselIndex] + 1);
+        }
+
+        function prevSlide(carouselIndex) {
+            showSlide(carouselIndex, currentSlides[carouselIndex] - 1);
+        }
+
+        function jumpToSlide(carouselIndex, slideIndex) {
+            showSlide(carouselIndex, slideIndex);
+        }
+    </script>
+</body>
+</html>

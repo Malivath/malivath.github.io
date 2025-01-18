@@ -38,20 +38,21 @@ header h1 {
 
 .button-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    bottom: 0; /* Positioned at the bottom of the header */
+    width: 100%;
     z-index: 1;
 }
 
 .button-container a {
+    width: 75px;
     padding: 10px 20px;
     background-color: #40556c;
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin: 15px; /* Increased margin to add more distance */
     text-align: center;
 }
 
@@ -64,6 +65,7 @@ header h1 {
     .button-container a {
         padding: 5px 10px;
         font-size: 0.8em;
+        margin: 10px 5px; /* Adjusted margin for mobile devices */
     }
 
     header h1 {

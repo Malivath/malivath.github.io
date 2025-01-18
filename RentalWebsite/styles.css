@@ -16,7 +16,7 @@ body {
 
 .header {
     text-align: center;
-    background-image: url('./Public/image37.png');
+    background-image: url('/RentalWebsite/Public/ResidentialLanding/image37.png');
     background-size: cover;
     background-position: center;
     padding: 20px;

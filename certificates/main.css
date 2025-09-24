@@ -1,12 +1,29 @@
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F3F3F3;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f3f3f3 100%);
     padding: 20px;
+    color: #22223b;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    color: #3a0ca3;
+    letter-spacing: 1px;
+    font-size: 2.8rem;
 }
 
 h2 {
     text-align: center;
     margin-bottom: 50px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    color: #3a0ca3;
+    letter-spacing: 1px;
+    font-size: 2.1rem;
 }
 
 #certifications-grid {
@@ -15,32 +32,41 @@ h2 {
     gap: 20px;
 }
 
+
 .certification-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
+    background: linear-gradient(120deg, #f8fafc 60%, #e0c3fc 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(58,12,163,0.08), 0 1.5px 6px 0 rgba(58,12,163,0.04);
+    padding: 24px 20px 20px 20px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
     position: relative;
-    display: flex; /* New line */
-    flex-direction: column; /* New line */
-    align-items: center; /* New line */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1.5px solid #b5179e22;
 }
+
 
 .certification-badge {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 15px;
-    transition: all 0.3s ease;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px 0 #b5179e33;
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
 }
+
 
 .certification-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 32px 0 #3a0ca355, 0 2px 8px 0 #b5179e33;
 }
 
+
 .certification-card:hover .certification-badge {
-    transform: translateY(-20px);
+    transform: translateY(-16px) scale(1.08);
+    box-shadow: 0 8px 32px 0 #3a0ca355;
 }
 
 .certification-desc {
@@ -50,28 +76,36 @@ h2 {
 .certification-card:hover .certification-desc {
     display: block;
 }
+
 .button {
     width: 220px;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     border: none;
     text-align: center;
-    font-weight: bold;
-    margin-bottom: 3px;
-    
-    /* Add these lines */
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.08rem;
     background-size: 200% auto;
-    background-image: linear-gradient(to right, #007bff 0%, #0056b3 51%, #007bff 100%);
-    transition: background-position 0.5s;
+    background-image: linear-gradient(90deg, #3a0ca3 0%, #b5179e 100%);
+    box-shadow: 0 2px 8px 0 #3a0ca322;
+    transition: background-position 0.5s, box-shadow 0.3s;
 }
 
 .button:hover {
     background-position: right center;
+    box-shadow: 0 4px 16px 0 #b5179e55;
 }
+
 
 p {
     text-align: center;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1.25rem;
+    color: #22223b;
+    line-height: 1.7;
 }

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js"></script>
 </head>
 
 <body>
@@ -113,11 +113,25 @@
       modal.style.display = 'block';
       
       try {
-        const response = await fetch('public/PORTFOLIO_PROJECT_CASE_STUDY.md');
+        const response = await fetch('./public/PORTFOLIO_PROJECT_CASE_STUDY.md');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const markdown = await response.text();
+        
+        // Check if marked library is loaded
+        if (typeof marked === 'undefined') {
+          throw new Error('Marked library not loaded');
+        }
+        
         content.innerHTML = marked.parse(markdown);
       } catch (error) {
-        content.innerHTML = '<p>Error loading documentation. Please try again.</p>';
+        content.innerHTML = `
+          <h2>Error Loading Documentation</h2>
+          <p>Unable to load the documentation file.</p>
+          <p>Error: ${error.message}</p>
+          <p>Please try refreshing the page or contact the site administrator.</p>
+        `;
         console.error('Error loading documentation:', error);
       }
     }

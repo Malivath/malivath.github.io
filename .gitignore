@@ -1,0 +1,15 @@
+# Unlinked project folders
+a&c/
+calc/
+gallery/
+login/
+mobile/
+paintingresto/
+puffmasters/
+RentalWebsite/
+TaxCalculator/
+Timeclock/
+verifier/
+
+# Node modules
+node_modules/

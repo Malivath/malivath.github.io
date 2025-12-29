@@ -74,11 +74,13 @@
         </li>
         <li>
           <h3>Recent Projects</h3>
+          <a class="button" href="./3dportfolio/index-3d.html">3D Portfolio</a>
           <a class="button" href="./CorseraPortfolio/index.html">Coursera Portfolio</a>
           <a class="button" href="https://lakesareaundercoating.com/">Lakes Area Undercoating</a>
           <a class="button" href="https://lovedictionary.net/">Love Dictionary</a>
-          <a class="button doc-link" href="#" onclick="openDocumentation(event)">📄 Love Dictionary Documentation</a>
+          <a class="button doc-link" href="#" onclick="openDocumentation(event, './public/PORTFOLIO_PROJECT_CASE_STUDY.md')">📄 Love Dictionary Documentation</a>
           <a class="button" href="https://moonleaftokers.com/">Moonleaf Tokers</a>
+          <a class="button doc-link" href="#" onclick="openDocumentation(event, './public/MOONLEAF.md')">📄 Moonleaf Tokers Documentation</a>
         </li>
       </ul>
     </section>
@@ -99,7 +101,7 @@
   </footer>
   
   <script>
-    async function openDocumentation(event) {
+    async function openDocumentation(event, filePath) {
       event.preventDefault();
       const modal = document.getElementById('docModal');
       const content = document.getElementById('docContent');
@@ -107,7 +109,7 @@
       modal.style.display = 'block';
       
       try {
-        const response = await fetch('./public/PORTFOLIO_PROJECT_CASE_STUDY.md');
+        const response = await fetch(filePath);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

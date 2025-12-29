@@ -158,6 +158,10 @@
       color: rgba(255, 255, 255, 0.5);
     }
 
+    #nav-hint .mobile-hint {
+      display: none;
+    }
+
     #nav-hint .scroll-icon {
       width: 24px;
       height: 40px;
@@ -375,33 +379,203 @@
 
     /* Mobile responsive */
     @media (max-width: 768px) {
-      #header h1 {
-        font-size: 1.3rem;
+      /* Header adjustments */
+      #header {
+        top: 15px;
+        width: 90%;
+        padding: 0 10px;
       }
 
+      #header h1 {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+      }
+
+      #header p {
+        font-size: 0.75rem;
+        margin-top: 3px;
+      }
+
+      /* Back button - larger touch target */
+      #back-btn {
+        top: 15px;
+        left: 15px;
+        padding: 12px 18px;
+        font-size: 0.85rem;
+        min-width: 44px;
+        min-height: 44px;
+      }
+
+      /* Info panel - slide up from bottom */
       #info-panel {
-        width: calc(100% - 40px);
-        right: -100%;
+        width: 100%;
+        right: 0;
+        left: 0;
         top: auto;
-        bottom: 0;
+        bottom: -100%;
         transform: none;
-        max-height: 60vh;
+        max-height: 70vh;
         border-radius: 20px 20px 0 0;
+        padding: 25px 20px;
+        padding-bottom: 30px;
       }
 
       #info-panel.active {
-        right: 20px;
-        left: 20px;
+        right: 0;
+        left: 0;
+        bottom: 0;
       }
 
+      #info-panel h2 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+        padding-right: 30px;
+      }
+
+      #info-panel p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      #info-panel .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+        margin: 10px 0;
+        font-size: 0.95rem;
+      }
+
+      #close-panel {
+        width: 44px;
+        height: 44px;
+        top: 12px;
+        right: 12px;
+        font-size: 1.4rem;
+      }
+
+      /* Social links - move to top right to avoid conflicts */
       #social-links {
+        top: 15px;
+        bottom: auto;
+        right: 15px;
+        gap: 10px;
+      }
+
+      .social-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .social-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Navigation hint - mobile-friendly text */
+      #nav-hint {
         bottom: 20px;
-        right: 20px;
+        width: 90%;
+        left: 50%;
+      }
+
+      #nav-hint p {
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+
+      #nav-hint .desktop-hint {
+        display: none;
+      }
+
+      #nav-hint .mobile-hint {
+        display: block;
+      }
+
+      #nav-hint .scroll-icon {
+        display: none;
+      }
+
+      /* Planet labels - smaller and more readable */
+      .planet-label {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+        border-radius: 12px;
+      }
+
+      .planet-label::before {
+        height: 6px;
+        bottom: -6px;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 380px) {
+      #header h1 {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+      }
+
+      #header p {
+        font-size: 0.7rem;
+      }
+
+      #info-panel {
+        max-height: 75vh;
+        padding: 20px 15px;
+      }
+
+      #info-panel h2 {
+        font-size: 1.1rem;
+      }
+
+      #info-panel p {
+        font-size: 0.85rem;
       }
 
       .social-btn {
         width: 40px;
         height: 40px;
+      }
+
+      #back-btn {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Landscape mode on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      #header {
+        display: none;
+      }
+
+      #info-panel {
+        max-height: 85vh;
+        width: 50%;
+        right: -60%;
+        left: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        border-radius: 20px;
+      }
+
+      #info-panel.active {
+        right: 10px;
+        left: auto;
+        bottom: auto;
+      }
+
+      #nav-hint {
+        bottom: 10px;
+      }
+
+      #social-links {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
       }
     }
   </style>
@@ -435,7 +609,8 @@
     </div>
 
     <div id="nav-hint">
-      <p>Scroll to zoom • Click planets to explore • Drag to orbit</p>
+      <p class="desktop-hint">Scroll to zoom • Click planets to explore • Drag to orbit</p>
+      <p class="mobile-hint">Tap planets to explore • Pinch to zoom • Swipe to orbit</p>
       <div class="scroll-icon"></div>
     </div>
 

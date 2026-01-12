@@ -1379,6 +1379,11 @@
       
       const colors = [0x00ffff, 0xff00ff, 0xffff00, 0x00ff00, 0xff6600, 0x0066ff];
       
+      // On mobile, position shapes closer to center so they're visible
+      const isMobile = window.innerWidth <= 900;
+      const xMinOffset = isMobile ? 5 : 15;
+      const xMaxOffset = isMobile ? 15 : 25;
+      
       for (let i = 0; i < 20; i++) {
         const geometry = shapes[Math.floor(Math.random() * shapes.length)];
         const color = colors[Math.floor(Math.random() * colors.length)];
@@ -1396,7 +1401,7 @@
         // Position randomly around the scene but behind/beside the board
         const side = Math.random() > 0.5 ? 1 : -1;
         mesh.position.set(
-          side * (15 + Math.random() * 25),
+          side * (xMinOffset + Math.random() * xMaxOffset),
           (Math.random() - 0.5) * 30,
           -10 - Math.random() * 40
         );
@@ -2667,6 +2672,19 @@
         camera.position.set(0, 5, 25);
         camera.lookAt(0, 0, 0);
       }
+      
+      // Reposition floating background shapes based on screen width
+      const isMobile = window.innerWidth <= 900;
+      const xMinOffset = isMobile ? 5 : 15;
+      const xMaxOffset = isMobile ? 15 : 25;
+      
+      backgroundObjects.forEach(mesh => {
+        const side = mesh.originalX > 0 ? 1 : -1;
+        const randomFactor = Math.abs(mesh.originalX) / 40; // Preserve relative position
+        const newX = side * (xMinOffset + randomFactor * xMaxOffset);
+        mesh.position.x = newX;
+        mesh.originalX = newX;
+      });
     }
     
     // Input handling

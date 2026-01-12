@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>TETRIS 3D - Neon Edition</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      overflow: hidden; 
+      background: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #container { width: 100vw; height: 100vh; }
+    
+    #ui {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(calc(-50% - 320px));
+      color: #fff;
+      z-index: 100;
+      pointer-events: none;
+    }
+    
+    #score-panel {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      padding: 15px 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      min-width: 140px;
+    }
+    
+    #score-panel h1 {
+      font-size: 14px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 5px;
+    }
+    
+    #score-panel .value {
+      font-size: 36px;
+      font-weight: bold;
+      color: #0ff;
+      text-shadow: 0 0 20px #0ff;
+    }
+    
+    #score-panel .stat {
+      margin-top: 15px;
+    }
+    
+    #score-panel .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    
+    #score-panel .stat-value {
+      font-size: 24px;
+      color: #fff;
+    }
+    
+    #next-piece {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-50% + 320px), -50%);
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #f0f;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+      z-index: 100;
+    }
+    
+    #next-piece h2 {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    
+    #next-canvas {
+      display: block;
+    }
+    
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+      z-index: 100;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    #game-over {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      flex-direction: column;
+    }
+    
+    #game-over.active { display: flex; }
+    
+    #game-over h1 {
+      font-size: 72px;
+      color: #f00;
+      text-shadow: 0 0 50px #f00, 0 0 100px #f00;
+      margin-bottom: 20px;
+      animation: pulse 1s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    #game-over .final-score {
+      font-size: 36px;
+      color: #0ff;
+      margin-bottom: 30px;
+    }
+    
+    #game-over button {
+      padding: 15px 40px;
+      font-size: 18px;
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: all 0.3s;
+    }
+    
+    #game-over button:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 30px #0ff;
+    }
+    
+    #highscores {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-50% - 320px), -50%);
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #ff0;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.2);
+      z-index: 100;
+      min-width: 150px;
+    }
+    
+    #highscores h3 {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    
+    #highscores ol {
+      list-style: none;
+      padding: 0;
+    }
+    
+    #highscores li {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      font-size: 14px;
+      color: #ff0;
+      border-bottom: 1px solid rgba(255, 255, 0, 0.1);
+    }
+    
+    #highscores li span:first-child {
+      color: #666;
+      margin-right: 10px;
+    }
+    
+    #start-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #000 0%, #1a0a2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      flex-direction: column;
+    }
+    
+    #start-screen.hidden { display: none; }
+    
+    #start-screen h1 {
+      font-size: 80px;
+      color: #fff;
+      text-shadow: 0 0 30px #0ff, 0 0 60px #f0f, 0 0 90px #0ff;
+      margin-bottom: 10px;
+      letter-spacing: 20px;
+    }
+    
+    #start-screen .subtitle {
+      font-size: 24px;
+      color: #f0f;
+      text-shadow: 0 0 20px #f0f;
+      margin-bottom: 50px;
+      letter-spacing: 10px;
+    }
+    
+    #start-screen button {
+      padding: 20px 60px;
+      font-size: 24px;
+      background: transparent;
+      border: 3px solid #0ff;
+      color: #0ff;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      transition: all 0.3s;
+      animation: glow 2s ease-in-out infinite;
+      margin: 10px;
+    }
+    
+    #start-screen button.sandbox-btn {
+      border-color: #ff0;
+      color: #ff0;
+      font-size: 16px;
+      padding: 15px 40px;
+      animation: glowYellow 2s ease-in-out infinite;
+    }
+    
+    @keyframes glowYellow {
+      0%, 100% { box-shadow: 0 0 15px #ff0; }
+      50% { box-shadow: 0 0 30px #ff0, 0 0 45px #f80; }
+    }
+    
+    #piece-selector {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #ff0;
+      border-radius: 10px;
+      padding: 15px;
+      z-index: 100;
+      display: none;
+    }
+    
+    #piece-selector.active {
+      display: block;
+    }
+    
+    #piece-selector h3 {
+      color: #ff0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    #piece-selector .pieces {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    #piece-selector .piece-btn {
+      width: 45px;
+      height: 45px;
+      border: 2px solid #666;
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    
+    #piece-selector .piece-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px currentColor;
+    }
+    
+    #piece-selector .piece-btn.I { color: #0ff; border-color: #0ff; }
+    #piece-selector .piece-btn.O { color: #ff0; border-color: #ff0; }
+    #piece-selector .piece-btn.T { color: #f0f; border-color: #f0f; }
+    #piece-selector .piece-btn.S { color: #0f0; border-color: #0f0; }
+    #piece-selector .piece-btn.Z { color: #f00; border-color: #f00; }
+    #piece-selector .piece-btn.J { color: #06f; border-color: #06f; }
+    #piece-selector .piece-btn.L { color: #f60; border-color: #f60; }
+    
+    #sandbox-label {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 0, 0.2);
+      border: 2px solid #ff0;
+      border-radius: 5px;
+      padding: 8px 20px;
+      color: #ff0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      z-index: 100;
+      display: none;
+    }
+    
+    #sandbox-label.active {
+      display: block;
+    }
+    
+    #lightning-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 140px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #aaddff;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      font-size: 24px;
+    }
+    
+    #lightning-btn.active {
+      display: flex;
+    }
+    
+    #lightning-btn:hover {
+      background: rgba(170, 221, 255, 0.3);
+      box-shadow: 0 0 20px rgba(170, 221, 255, 0.7);
+      transform: scale(1.1);
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px #0ff; }
+      50% { box-shadow: 0 0 40px #0ff, 0 0 60px #f0f; }
+    }
+    
+    #start-screen button:hover {
+      background: #0ff;
+      color: #000;
+      transform: scale(1.1);
+    }
+    
+    #combo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      color: #ff0;
+      text-shadow: 0 0 30px #ff0;
+      opacity: 0;
+      z-index: 150;
+      pointer-events: none;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    #combo.show {
+      animation: comboAnim 1s ease-out forwards;
+    }
+    
+    @keyframes comboAnim {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5) translateY(-50px); }
+    }
+    
+    #volume-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #0ff;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    #volume-btn:hover {
+      background: rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+    
+    #volume-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #0ff;
+    }
+    
+    #volume-btn.muted {
+      border-color: #f00;
+    }
+    
+    #volume-btn.muted svg {
+      fill: #f00;
+    }
+    
+    #pause-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 80px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #f0f;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    #pause-btn:hover {
+      background: rgba(255, 0, 255, 0.2);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+      transform: scale(1.1);
+    }
+    
+    #pause-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #f0f;
+    }
+    
+    #pause-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 180;
+      flex-direction: column;
+    }
+    
+    #pause-overlay.active {
+      display: flex;
+    }
+    
+    #pause-overlay h1 {
+      font-size: 72px;
+      color: #f0f;
+      text-shadow: 0 0 50px #f0f;
+      margin-bottom: 30px;
+      animation: pulse 1s ease-in-out infinite;
+    }
+    
+    #pause-overlay button {
+      padding: 15px 40px;
+      font-size: 18px;
+      background: transparent;
+      border: 2px solid #f0f;
+      color: #f0f;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: all 0.3s;
+    }
+    
+    #pause-overlay button:hover {
+      background: #f0f;
+      color: #000;
+      box-shadow: 0 0 30px #f0f;
+    }
+    
+    /* Mobile Touch Controls */
+    #touch-controls {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      padding-bottom: max(15px, env(safe-area-inset-bottom));
+      z-index: 100;
+      pointer-events: none;
+    }
+    
+    #touch-controls.active {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    
+    .touch-btn {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 255, 255, 0.15);
+      border: 2px solid rgba(0, 255, 255, 0.5);
+      border-radius: 50%;
+      color: #0ff;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: background 0.1s, transform 0.1s;
+    }
+    
+    .touch-btn:active {
+      background: rgba(0, 255, 255, 0.4);
+      transform: scale(0.95);
+    }
+    
+    .touch-btn.drop-btn {
+      width: 70px;
+      height: 70px;
+      background: rgba(255, 0, 255, 0.15);
+      border-color: rgba(255, 0, 255, 0.5);
+      color: #f0f;
+      font-size: 24px;
+    }
+    
+    .touch-btn.drop-btn:active {
+      background: rgba(255, 0, 255, 0.4);
+    }
+    
+    .touch-left-group, .touch-right-group {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .touch-center-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .touch-row {
+      display: flex;
+      gap: 10px;
+    }
+    
+    /* Mobile Responsive Styles */
+    @media (max-width: 900px) {
+      #ui {
+        top: 10px;
+        left: 10px;
+        transform: none;
+      }
+      
+      #score-panel {
+        padding: 10px 12px;
+        min-width: 100px;
+      }
+      
+      #score-panel h1 {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+      
+      #score-panel .value {
+        font-size: 24px;
+      }
+      
+      #score-panel .stat {
+        margin-top: 8px;
+      }
+      
+      #score-panel .stat-value {
+        font-size: 18px;
+      }
+      
+      #next-piece {
+        top: 10px;
+        right: 10px;
+        left: auto;
+        transform: none;
+        padding: 10px;
+      }
+      
+      #next-piece h2 {
+        font-size: 10px;
+      }
+      
+      #next-canvas {
+        width: 60px;
+        height: 60px;
+      }
+      
+      #highscores {
+        display: none;
+      }
+      
+      #controls {
+        display: none;
+      }
+      
+      #volume-btn, #pause-btn, #lightning-btn {
+        width: 44px;
+        height: 44px;
+        bottom: auto;
+        top: 10px;
+      }
+      
+      #volume-btn {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      #pause-btn {
+        right: auto;
+        left: 50%;
+        transform: translateX(calc(-50% + 55px));
+      }
+      
+      #lightning-btn {
+        right: auto;
+        left: 50%;
+        transform: translateX(calc(-50% - 55px));
+      }
+      
+      #sandbox-label {
+        top: auto;
+        bottom: 180px;
+        font-size: 10px;
+        padding: 5px 10px;
+      }
+      
+      #piece-selector {
+        top: auto;
+        bottom: 200px;
+        right: 10px;
+        transform: none;
+      }
+      
+      #start-screen h1 {
+        font-size: 48px;
+        letter-spacing: 10px;
+      }
+      
+      #start-screen .subtitle {
+        font-size: 16px;
+        letter-spacing: 5px;
+        margin-bottom: 30px;
+      }
+      
+      #start-screen button {
+        padding: 15px 40px;
+        font-size: 18px;
+        letter-spacing: 3px;
+      }
+      
+      #start-screen button.sandbox-btn {
+        font-size: 12px;
+        padding: 12px 25px;
+      }
+      
+      #game-over h1 {
+        font-size: 48px;
+      }
+      
+      #game-over .final-score {
+        font-size: 24px;
+      }
+      
+      #pause-overlay h1 {
+        font-size: 48px;
+      }
+      
+      #combo {
+        font-size: 36px;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      #score-panel .value {
+        font-size: 20px;
+      }
+      
+      #score-panel .stat-value {
+        font-size: 16px;
+      }
+      
+      .touch-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+      }
+      
+      .touch-btn.drop-btn {
+        width: 65px;
+        height: 65px;
+      }
+      
+      #start-screen h1 {
+        font-size: 36px;
+        letter-spacing: 8px;
+      }
+      
+      #start-screen .subtitle {
+        font-size: 14px;
+      }
+    }
+    
+    /* Prevent pull-to-refresh and overscroll */
+    html, body {
+      overscroll-behavior: none;
+    }
+    
+    /* Disclaimer Popup */
+    #disclaimer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 400;
+      padding: 20px;
+      touch-action: auto;
+    }
+    
+    #disclaimer.hidden {
+      display: none;
+    }
+    
+    #disclaimer .disclaimer-box {
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+      border: 2px solid #0ff;
+      border-radius: 15px;
+      padding: 30px 40px;
+      max-width: 600px;
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
+    }
+    
+    #disclaimer h2 {
+      color: #0ff;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-align: center;
+      text-shadow: 0 0 20px #0ff;
+    }
+    
+    #disclaimer p {
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    #disclaimer .trademark {
+      color: #888;
+      font-size: 12px;
+      font-style: italic;
+      border-top: 1px solid #333;
+      padding-top: 15px;
+      margin-top: 20px;
+    }
+    
+    #disclaimer .author {
+      color: #f0f;
+      font-weight: bold;
+    }
+    
+    #disclaimer button {
+      display: block;
+      margin: 25px auto 0;
+      padding: 12px 40px;
+      font-size: 16px;
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: all 0.3s;
+      border-radius: 5px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    #disclaimer button:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 30px #0ff;
+    }
+    
+    @media (max-width: 600px) {
+      #disclaimer .disclaimer-box {
+        padding: 20px;
+        margin: 10px;
+      }
+      
+      #disclaimer h2 {
+        font-size: 18px;
+      }
+      
+      #disclaimer p {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  
+  <!-- Legal Disclaimer -->
+  <div id="disclaimer">
+    <div class="disclaimer-box">
+      <h2>Legal Disclaimer</h2>
+      <p>
+        This is an independent, non-commercial fan project created by 
+        <span class="author">Matthew Fuller</span> for educational and portfolio 
+        demonstration purposes only. This 3D implementation was built as a personal 
+        programming exercise and is not intended for commercial use or distribution.
+      </p>
+      <p>
+        This project is not affiliated with, endorsed by, sponsored by, or in any way 
+        officially connected with The Tetris Company, LLC, or any of its subsidiaries 
+        or affiliates.
+      </p>
+      <p class="trademark">
+        Tetris® is a registered trademark of The Tetris Company, LLC. All original 
+        Tetris game design, concepts, and intellectual property rights belong to their 
+        respective owners. This fan-made recreation is provided "as-is" for personal, 
+        non-commercial enjoyment only.
+      </p>
+      <button id="disclaimer-btn" onclick="document.getElementById('disclaimer').style.display='none'; document.getElementById('start-screen').classList.remove('hidden');">I Understand</button>
+    </div>
+  </div>
+  
+  <div id="start-screen" class="hidden">
+    <h1>TETRIS</h1>
+    <div class="subtitle">3D NEON EDITION</div>
+    <button onclick="startGame(false)">PLAY</button>
+    <!-- <button class="sandbox-btn" onclick="startGame(true)">🧪 SANDBOX MODE</button> -->
+  </div>
+  
+  <div id="sandbox-label">🧪 SANDBOX MODE - Select pieces below</div>
+  
+  <div id="piece-selector">
+    <h3>Next Piece</h3>
+    <div class="pieces">
+      <button class="piece-btn I" onclick="selectPiece('I')">I</button>
+      <button class="piece-btn O" onclick="selectPiece('O')">O</button>
+      <button class="piece-btn T" onclick="selectPiece('T')">T</button>
+      <button class="piece-btn S" onclick="selectPiece('S')">S</button>
+      <button class="piece-btn Z" onclick="selectPiece('Z')">Z</button>
+      <button class="piece-btn J" onclick="selectPiece('J')">J</button>
+      <button class="piece-btn L" onclick="selectPiece('L')">L</button>
+    </div>
+  </div>
+  
+  <div id="ui">
+    <div id="score-panel">
+      <h1>Score</h1>
+      <div class="value" id="score">0</div>
+      <div class="stat">
+        <div class="stat-label">Level</div>
+        <div class="stat-value" id="level">1</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Lines</div>
+        <div class="stat-value" id="lines">0</div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="highscores">
+    <h3>🏆 High Scores</h3>
+    <ol id="highscore-list"></ol>
+  </div>
+  
+  <div id="next-piece">
+    <h2>Next</h2>
+    <canvas id="next-canvas" width="100" height="100"></canvas>
+  </div>
+  
+  <div id="controls">
+    ← → Move &nbsp;|&nbsp; ↑ Rotate &nbsp;|&nbsp; ↓ Soft Drop &nbsp;|&nbsp; Space Hard Drop &nbsp;|&nbsp; P Pause
+  </div>
+  
+  <div id="combo"></div>
+  
+  <button id="lightning-btn" onclick="triggerLightning()" title="Trigger Lightning">⚡</button>
+  
+  <button id="volume-btn" onclick="toggleVolume()" title="Toggle Sound">
+    <svg id="volume-icon" viewBox="0 0 24 24">
+      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+    </svg>
+    <svg id="mute-icon" viewBox="0 0 24 24" style="display:none">
+      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+    </svg>
+  </button>
+  
+  <button id="pause-btn" onclick="togglePause()" title="Pause Game">
+    <svg id="pause-icon" viewBox="0 0 24 24">
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+    </svg>
+    <svg id="play-icon" viewBox="0 0 24 24" style="display:none">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
+  
+  <div id="pause-overlay">
+    <h1>PAUSED</h1>
+    <button onclick="togglePause()">RESUME</button>
+  </div>
+  
+  <div id="game-over">
+    <h1>GAME OVER</h1>
+    <div class="final-score">Score: <span id="final-score">0</span></div>
+    <button onclick="restartGame()">PLAY AGAIN</button>
+  </div>
+  
+  <!-- Mobile Touch Controls -->
+  <div id="touch-controls">
+    <div class="touch-left-group">
+      <button class="touch-btn" id="touch-left" aria-label="Move Left">◀</button>
+      <button class="touch-btn" id="touch-right" aria-label="Move Right">▶</button>
+    </div>
+    <div class="touch-center-group">
+      <button class="touch-btn drop-btn" id="touch-drop" aria-label="Hard Drop">⬇</button>
+      <button class="touch-btn" id="touch-down" aria-label="Soft Drop">▼</button>
+    </div>
+    <div class="touch-right-group">
+      <button class="touch-btn" id="touch-rotate" aria-label="Rotate">↻</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // ============================================
+    // TETRIS 3D - NEON EDITION
+    // ============================================
+    
+    // Sound System using Web Audio API
+    const AudioSystem = {
+      ctx: null,
+      enabled: true,
+      
+      init() {
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      },
+      
+      resume() {
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      },
+      
+      playTone(freq, duration, type = 'square', volume = 0.3) {
+        if (!this.enabled || !this.ctx) return;
+        
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+        
+        gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+        
+        osc.start(this.ctx.currentTime);
+        osc.stop(this.ctx.currentTime + duration);
+      },
+      
+      move() {
+        this.playTone(200, 0.05, 'square', 0.1);
+      },
+      
+      rotate() {
+        this.playTone(400, 0.08, 'sine', 0.2);
+        setTimeout(() => this.playTone(500, 0.08, 'sine', 0.15), 30);
+      },
+      
+      drop() {
+        this.playTone(150, 0.1, 'triangle', 0.3);
+      },
+      
+      hardDrop() {
+        this.playTone(100, 0.15, 'sawtooth', 0.25);
+        setTimeout(() => this.playTone(80, 0.2, 'sawtooth', 0.2), 50);
+      },
+      
+      lock() {
+        this.playTone(300, 0.1, 'square', 0.2);
+        this.playTone(200, 0.15, 'square', 0.15);
+      },
+      
+      clearLine(count) {
+        const baseFreq = 400;
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            this.playTone(baseFreq + i * 100, 0.15, 'sine', 0.3);
+          }, i * 80);
+        }
+        // Satisfying arpeggio
+        setTimeout(() => {
+          [523, 659, 784, 1047].forEach((freq, i) => {
+            setTimeout(() => this.playTone(freq, 0.2, 'sine', 0.25), i * 50);
+          });
+        }, count * 80);
+      },
+      
+      tetris() {
+        // Epic tetris sound!
+        const notes = [523, 659, 784, 1047, 784, 659, 523, 659, 784, 1047];
+        notes.forEach((freq, i) => {
+          setTimeout(() => this.playTone(freq, 0.15, 'sine', 0.3), i * 60);
+        });
+      },
+      
+      levelUp() {
+        [400, 500, 600, 800].forEach((freq, i) => {
+          setTimeout(() => this.playTone(freq, 0.2, 'sine', 0.3), i * 100);
+        });
+      },
+      
+      gameOver() {
+        [400, 350, 300, 250, 200, 150].forEach((freq, i) => {
+          setTimeout(() => this.playTone(freq, 0.3, 'sawtooth', 0.2), i * 150);
+        });
+      },
+      
+      gameStart() {
+        [262, 330, 392, 523].forEach((freq, i) => {
+          setTimeout(() => this.playTone(freq, 0.15, 'sine', 0.25), i * 100);
+        });
+      },
+      
+      toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+      }
+    };
+    
+    function toggleVolume() {
+      const isEnabled = AudioSystem.toggle();
+      const btn = document.getElementById('volume-btn');
+      const volumeIcon = document.getElementById('volume-icon');
+      const muteIcon = document.getElementById('mute-icon');
+      
+      if (isEnabled) {
+        btn.classList.remove('muted');
+        volumeIcon.style.display = 'block';
+        muteIcon.style.display = 'none';
+        btn.title = 'Mute Sound';
+      } else {
+        btn.classList.add('muted');
+        volumeIcon.style.display = 'none';
+        muteIcon.style.display = 'block';
+        btn.title = 'Unmute Sound';
+      }
+    }
+    
+    function togglePause() {
+      if (gameState === 'waiting' || gameState === 'gameover') return;
+      
+      const pauseOverlay = document.getElementById('pause-overlay');
+      const pauseIcon = document.getElementById('pause-icon');
+      const playIcon = document.getElementById('play-icon');
+      const pauseBtn = document.getElementById('pause-btn');
+      
+      if (gameState === 'playing') {
+        gameState = 'paused';
+        pauseOverlay.classList.add('active');
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+        pauseBtn.title = 'Resume Game';
+      } else if (gameState === 'paused') {
+        gameState = 'playing';
+        pauseOverlay.classList.remove('active');
+        pauseIcon.style.display = 'block';
+        playIcon.style.display = 'none';
+        pauseBtn.title = 'Pause Game';
+        lastDrop = performance.now(); // Reset drop timer to prevent instant drop
+      }
+    }
+    
+    let scene, camera, renderer, composer;
+    let board = [];
+    let currentPiece = null;
+    let nextPiece = null;
+    let gameState = 'waiting';
+    let score = 0;
+    let level = 1;
+    let lines = 0;
+    let dropInterval = 1000;
+    let lastDrop = 0;
+    let boardMeshes = [];
+    let currentPieceMeshes = [];
+    let particles = [];
+    let cameraAngle = 0;
+    let targetCameraAngle = 0;
+    let backgroundObjects = [];
+    let torusRings = [];
+    let energyBeams = [];
+    let shockwaves = [];
+    let sandboxMode = false;
+    let selectedPieceType = null;
+    let bee = null;
+    let beeVisible = false;
+    let beeTarget = new THREE.Vector3();
+    let nextBeeTime = 0;
+    let gridHelper = null;
+    let lightningBolts = [];
+    let gridGlow = 0;
+    let nextLightningTime = 0;
+    let lightningAmbient = null;
+    let skyDome = null;
+    let skyFlashIntensity = 0;
+    let scatterFear = 0;
+    let lightningOrigin = new THREE.Vector3(0, 50, -30);
+    
+    const COLS = 10;
+    const ROWS = 20;
+    const BLOCK_SIZE = 1;
+    const BOARD_OFFSET_X = -COLS / 2;
+    const BOARD_OFFSET_Y = -ROWS / 2;
+    
+    // Tetromino definitions with neon colors
+    const PIECES = {
+      I: { shape: [[1,1,1,1]], color: 0x00ffff },
+      O: { shape: [[1,1],[1,1]], color: 0xffff00 },
+      T: { shape: [[0,1,0],[1,1,1]], color: 0xff00ff },
+      S: { shape: [[0,1,1],[1,1,0]], color: 0x00ff00 },
+      Z: { shape: [[1,1,0],[0,1,1]], color: 0xff0000 },
+      J: { shape: [[1,0,0],[1,1,1]], color: 0x0066ff },
+      L: { shape: [[0,0,1],[1,1,1]], color: 0xff6600 }
+    };
+    
+    // High score management
+    function getHighScores() {
+      try {
+        return JSON.parse(localStorage.getItem('tetris3d-highscores') || '[]');
+      } catch { return []; }
+    }
+    
+    function saveHighScore(newScore) {
+      let scores = getHighScores();
+      scores.push({ score: newScore, date: new Date().toLocaleDateString() });
+      scores.sort((a, b) => b.score - a.score);
+      scores = scores.slice(0, 5);
+      localStorage.setItem('tetris3d-highscores', JSON.stringify(scores));
+      updateHighScoreDisplay();
+    }
+    
+    function updateHighScoreDisplay() {
+      const list = document.getElementById('highscore-list');
+      const scores = getHighScores();
+      list.innerHTML = scores.length ? scores.map((s, i) => 
+        `<li><span>#${i+1}</span> ${s.score.toLocaleString()}</li>`
+      ).join('') : '<li style="color:#666">No scores yet</li>';
+    }
+    
+    // Initialize Three.js scene
+    function initScene() {
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x000000, 0.02);
+      
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 5, 25);
+      camera.lookAt(0, 0, 0);
+      
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x0a0a1a);
+      document.getElementById('container').appendChild(renderer.domElement);
+      
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0x222244, 0.5);
+      scene.add(ambientLight);
+      
+      const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      mainLight.position.set(10, 20, 10);
+      scene.add(mainLight);
+      
+      // Colored point lights for atmosphere
+      const light1 = new THREE.PointLight(0x00ffff, 2, 50);
+      light1.position.set(-15, 10, 10);
+      scene.add(light1);
+      
+      const light2 = new THREE.PointLight(0xff00ff, 2, 50);
+      light2.position.set(15, -5, 10);
+      scene.add(light2);
+      
+      const light3 = new THREE.PointLight(0xffff00, 1, 30);
+      light3.position.set(0, 15, 5);
+      scene.add(light3);
+      
+      // Lightning ambient light (starts invisible)
+      lightningAmbient = new THREE.PointLight(0xaaddff, 0, 100);
+      lightningAmbient.position.set(0, 30, 10);
+      scene.add(lightningAmbient);
+      
+      // Create board frame
+      createBoardFrame();
+      
+      // Create starfield background
+      createStarfield();
+      
+      // Create grid floor
+      createGridFloor();
+      
+      // Create floating shapes
+      createFloatingShapes();
+      
+      // Create animated torus rings
+      createTorusRings();
+      
+      // Create energy beams
+      createEnergyBeams();
+      
+      // Create the bee! 🐝
+      createBee();
+      
+      // Handle resize
+      window.addEventListener('resize', onWindowResize);
+    }
+    
+    function createBoardFrame() {
+      const frameGeometry = new THREE.BoxGeometry(0.3, ROWS + 1, 1.5);
+      const frameMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0x333366,
+        metalness: 0.8,
+        roughness: 0.2,
+        emissive: 0x111133
+      });
+      
+      // Left frame
+      const leftFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+      leftFrame.position.set(BOARD_OFFSET_X - 0.65, 0, 0);
+      scene.add(leftFrame);
+      
+      // Right frame
+      const rightFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+      rightFrame.position.set(-BOARD_OFFSET_X + 0.65, 0, 0);
+      scene.add(rightFrame);
+      
+      // Bottom frame
+      const bottomGeometry = new THREE.BoxGeometry(COLS + 1.6, 0.3, 1.5);
+      const bottomFrame = new THREE.Mesh(bottomGeometry, frameMaterial);
+      bottomFrame.position.set(0, BOARD_OFFSET_Y - 0.65, 0);
+      scene.add(bottomFrame);
+      
+      // Glowing edges
+      const edgeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+      const edgeGeometry = new THREE.BoxGeometry(0.05, ROWS + 1, 0.05);
+      
+      const edge1 = new THREE.Mesh(edgeGeometry, edgeMaterial);
+      edge1.position.set(BOARD_OFFSET_X - 0.3, 0, 0.75);
+      scene.add(edge1);
+      
+      const edge2 = new THREE.Mesh(edgeGeometry, edgeMaterial);
+      edge2.position.set(-BOARD_OFFSET_X + 0.3, 0, 0.75);
+      scene.add(edge2);
+    }
+    
+    function createStarfield() {
+      const starGeometry = new THREE.BufferGeometry();
+      const starCount = 2000;
+      const positions = new Float32Array(starCount * 3);
+      const colors = new Float32Array(starCount * 3);
+      
+      for (let i = 0; i < starCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 200;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
+        positions[i * 3 + 2] = -50 - Math.random() * 100;
+        
+        const color = new THREE.Color();
+        color.setHSL(Math.random(), 0.8, 0.6);
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+      }
+      
+      starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      
+      const starMaterial = new THREE.PointsMaterial({ 
+        size: 0.5, 
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8
+      });
+      
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+      
+      // Create sky dome for lightning flash effect
+      const skyGeometry = new THREE.SphereGeometry(180, 32, 32);
+      const skyMaterial = new THREE.MeshBasicMaterial({
+        color: 0x4488ff,
+        transparent: true,
+        opacity: 0,
+        side: THREE.BackSide
+      });
+      skyDome = new THREE.Mesh(skyGeometry, skyMaterial);
+      scene.add(skyDome);
+    }
+    
+    function createGridFloor() {
+      gridHelper = new THREE.GridHelper(100, 50, 0x0066ff, 0x003366);
+      gridHelper.position.y = BOARD_OFFSET_Y - 1;
+      gridHelper.rotation.x = Math.PI / 8;
+      gridHelper.material.transparent = true;
+      scene.add(gridHelper);
+      
+      // Schedule first lightning
+      nextLightningTime = 10000 + Math.random() * 20000;
+    }
+    
+    function createFloatingShapes() {
+      const shapes = [
+        new THREE.TetrahedronGeometry(1.5),
+        new THREE.OctahedronGeometry(1.2),
+        new THREE.IcosahedronGeometry(1),
+        new THREE.DodecahedronGeometry(0.8),
+        new THREE.BoxGeometry(1.2, 1.2, 1.2)
+      ];
+      
+      const colors = [0x00ffff, 0xff00ff, 0xffff00, 0x00ff00, 0xff6600, 0x0066ff];
+      
+      for (let i = 0; i < 20; i++) {
+        const geometry = shapes[Math.floor(Math.random() * shapes.length)];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.4
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.originalColor = new THREE.Color(color);
+        
+        // Position randomly around the scene but behind/beside the board
+        const side = Math.random() > 0.5 ? 1 : -1;
+        mesh.position.set(
+          side * (15 + Math.random() * 25),
+          (Math.random() - 0.5) * 30,
+          -10 - Math.random() * 40
+        );
+        
+        mesh.rotationSpeed = {
+          x: (Math.random() - 0.5) * 0.02,
+          y: (Math.random() - 0.5) * 0.02,
+          z: (Math.random() - 0.5) * 0.02
+        };
+        
+        mesh.floatSpeed = 0.0005 + Math.random() * 0.001;
+        mesh.floatOffset = Math.random() * Math.PI * 2;
+        mesh.originalY = mesh.position.y;
+        mesh.originalX = mesh.position.x;
+        mesh.originalZ = mesh.position.z;
+        mesh.originalOpacity = 0.4;
+        mesh.velocity = new THREE.Vector3(0, 0, 0);
+        
+        scene.add(mesh);
+        backgroundObjects.push(mesh);
+      }
+    }
+    
+    function createTorusRings() {
+      const ringColors = [0x00ffff, 0xff00ff, 0xffff00];
+      
+      for (let i = 0; i < 5; i++) {
+        const geometry = new THREE.TorusGeometry(8 + i * 4, 0.1, 16, 100);
+        const material = new THREE.MeshBasicMaterial({
+          color: ringColors[i % ringColors.length],
+          transparent: true,
+          opacity: 0.3
+        });
+        
+        const torus = new THREE.Mesh(geometry, material);
+        torus.position.set(0, 0, -30 - i * 10);
+        torus.originalZ = torus.position.z;
+        torus.originalOpacity = 0.3;
+        torus.rotationSpeed = 0.002 + i * 0.001;
+        torus.wobbleSpeed = 0.001 + i * 0.0005;
+        torus.wobbleOffset = i * Math.PI / 3;
+        torus.velocity = 0;
+        
+        scene.add(torus);
+        torusRings.push(torus);
+      }
+    }
+    
+    function createEnergyBeams() {
+      const beamCount = 8;
+      
+      for (let i = 0; i < beamCount; i++) {
+        const geometry = new THREE.CylinderGeometry(0.05, 0.05, 100, 8);
+        const color = new THREE.Color();
+        color.setHSL(i / beamCount, 1, 0.5);
+        
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.2
+        });
+        
+        const beam = new THREE.Mesh(geometry, material);
+        
+        const angle = (i / beamCount) * Math.PI * 2;
+        const radius = 35;
+        beam.position.set(
+          Math.cos(angle) * radius,
+          0,
+          -20 + Math.sin(angle) * radius
+        );
+        
+        beam.rotation.x = Math.PI / 2;
+        beam.rotation.z = angle;
+        beam.originalAngle = angle;
+        beam.originalRadius = radius;
+        beam.originalOpacity = 0.2;
+        beam.orbitSpeed = 0.0003;
+        beam.pulseSpeed = 0.005 + Math.random() * 0.005;
+        beam.pulseOffset = Math.random() * Math.PI * 2;
+        beam.radiusVelocity = 0;
+        
+        scene.add(beam);
+        energyBeams.push(beam);
+      }
+    }
+    
+    function createBee() {
+      // Create a cute 3D bee! 🐝
+      bee = new THREE.Group();
+      
+      // Body (yellow with black stripes)
+      const bodyGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+      const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xffcc00 });
+      const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+      body.scale.set(1, 0.8, 1.3);
+      bee.add(body);
+      
+      // Black stripes
+      for (let i = -1; i <= 1; i++) {
+        const stripeGeometry = new THREE.TorusGeometry(0.35, 0.06, 8, 16);
+        const stripeMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
+        const stripe = new THREE.Mesh(stripeGeometry, stripeMaterial);
+        stripe.position.z = i * 0.25;
+        stripe.rotation.y = Math.PI / 2;
+        bee.add(stripe);
+      }
+      
+      // Head
+      const headGeometry = new THREE.SphereGeometry(0.25, 16, 16);
+      const headMaterial = new THREE.MeshStandardMaterial({ color: 0xffcc00 });
+      const head = new THREE.Mesh(headGeometry, headMaterial);
+      head.position.z = 0.55;
+      bee.add(head);
+      
+      // Eyes
+      const eyeGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+      const eyeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+      const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+      leftEye.position.set(0.12, 0.1, 0.7);
+      bee.add(leftEye);
+      const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+      rightEye.position.set(-0.12, 0.1, 0.7);
+      bee.add(rightEye);
+      
+      // Wings
+      const wingGeometry = new THREE.EllipseCurve(0, 0, 0.5, 0.25, 0, Math.PI * 2, false, 0);
+      const wingPoints = wingGeometry.getPoints(20);
+      const wingShape = new THREE.Shape(wingPoints);
+      const wingMeshGeometry = new THREE.ShapeGeometry(wingShape);
+      const wingMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0xaaddff, 
+        transparent: true, 
+        opacity: 0.6,
+        side: THREE.DoubleSide
+      });
+      
+      const leftWing = new THREE.Mesh(wingMeshGeometry, wingMaterial);
+      leftWing.position.set(0.3, 0.3, 0);
+      leftWing.rotation.y = 0.3;
+      leftWing.name = 'leftWing';
+      bee.add(leftWing);
+      
+      const rightWing = new THREE.Mesh(wingMeshGeometry, wingMaterial);
+      rightWing.position.set(-0.3, 0.3, 0);
+      rightWing.rotation.y = -0.3;
+      rightWing.name = 'rightWing';
+      bee.add(rightWing);
+      
+      // Stinger
+      const stingerGeometry = new THREE.ConeGeometry(0.05, 0.2, 8);
+      const stingerMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
+      const stinger = new THREE.Mesh(stingerGeometry, stingerMaterial);
+      stinger.position.z = -0.6;
+      stinger.rotation.x = Math.PI / 2;
+      bee.add(stinger);
+      
+      // Antennae
+      const antennaGeometry = new THREE.CylinderGeometry(0.02, 0.02, 0.3, 8);
+      const antennaMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
+      const leftAntenna = new THREE.Mesh(antennaGeometry, antennaMaterial);
+      leftAntenna.position.set(0.1, 0.2, 0.7);
+      leftAntenna.rotation.x = -0.5;
+      leftAntenna.rotation.z = -0.3;
+      bee.add(leftAntenna);
+      const rightAntenna = new THREE.Mesh(antennaGeometry, antennaMaterial);
+      rightAntenna.position.set(-0.1, 0.2, 0.7);
+      rightAntenna.rotation.x = -0.5;
+      rightAntenna.rotation.z = 0.3;
+      bee.add(rightAntenna);
+      
+      // Start hidden off-screen
+      bee.position.set(-50, 0, -10);
+      bee.visible = false;
+      scene.add(bee);
+      
+      // Schedule first appearance (will be overridden for sandbox mode)
+      nextBeeTime = 5000 + Math.random() * 10000;
+    }
+    
+    function updateBee(time) {
+      if (!bee) return;
+      
+      // In sandbox mode, bee shows up immediately and more frequently
+      const spawnDelay = sandboxMode ? 0 : nextBeeTime;
+      const respawnMin = sandboxMode ? 3000 : 15000;
+      const respawnMax = sandboxMode ? 8000 : 30000;
+      
+      // Check if it's time to spawn bee
+      if (!beeVisible && time > spawnDelay) {
+        beeVisible = true;
+        bee.visible = true;
+        
+        // Random start position (off-screen)
+        const side = Math.random() > 0.5 ? 1 : -1;
+        bee.position.set(side * 30, (Math.random() - 0.5) * 15, -5 + Math.random() * 10);
+        
+        // Random target on the other side
+        beeTarget.set(-side * 30, (Math.random() - 0.5) * 15, -5 + Math.random() * 10);
+      }
+      
+      if (beeVisible) {
+        // Fly towards target with wobble
+        const direction = beeTarget.clone().sub(bee.position);
+        const distance = direction.length();
+        
+        if (distance < 1) {
+          // Reached target, hide and schedule next appearance
+          beeVisible = false;
+          bee.visible = false;
+          nextBeeTime = time + respawnMin + Math.random() * respawnMax;
+        } else {
+          // Move towards target
+          direction.normalize().multiplyScalar(0.15);
+          bee.position.add(direction);
+          
+          // Wobble movement
+          bee.position.y += Math.sin(time * 0.01) * 0.05;
+          bee.position.x += Math.sin(time * 0.008) * 0.02;
+          
+          // Face direction of movement
+          bee.lookAt(beeTarget);
+          
+          // Wing flapping
+          bee.children.forEach(child => {
+            if (child.name === 'leftWing') {
+              child.rotation.z = Math.sin(time * 0.05) * 0.5;
+            } else if (child.name === 'rightWing') {
+              child.rotation.z = -Math.sin(time * 0.05) * 0.5;
+            }
+          });
+          
+          // Subtle body bob
+          bee.rotation.z = Math.sin(time * 0.008) * 0.1;
+        }
+      }
+    }
+    
+    function updateBackgroundEffects(time) {
+      // Calculate glow boost from lightning
+      const glowBoost = scatterFear * 2;
+      
+      // Floating shapes - scatter from lightning!
+      backgroundObjects.forEach(obj => {
+        // Apply velocity (scatter)
+        if (scatterFear > 0.1) {
+          obj.position.x += obj.velocity.x;
+          obj.position.y += obj.velocity.y;
+          obj.position.z += obj.velocity.z;
+          
+          // Dampen velocity
+          obj.velocity.multiplyScalar(0.96);
+          
+          // Spin faster when scared!
+          obj.rotation.x += obj.rotationSpeed.x * (1 + scatterFear * 5);
+          obj.rotation.y += obj.rotationSpeed.y * (1 + scatterFear * 5);
+          obj.rotation.z += obj.rotationSpeed.z * (1 + scatterFear * 5);
+        } else {
+          // Normal rotation
+          obj.rotation.x += obj.rotationSpeed.x;
+          obj.rotation.y += obj.rotationSpeed.y;
+          obj.rotation.z += obj.rotationSpeed.z;
+          
+          // Slowly return to original position
+          obj.position.x += (obj.originalX - obj.position.x) * 0.01;
+          obj.position.z += (obj.originalZ - obj.position.z) * 0.01;
+        }
+        
+        // Float animation on Y
+        const targetY = obj.originalY + Math.sin(time * obj.floatSpeed + obj.floatOffset) * 3;
+        obj.position.y += (targetY - obj.position.y) * 0.05;
+        
+        // Light up during lightning!
+        obj.material.opacity = obj.originalOpacity + glowBoost * 0.4;
+        if (scatterFear > 0.5) {
+          // Flash bright white-ish
+          const flash = (scatterFear - 0.5) * 2;
+          obj.material.color.lerpColors(obj.originalColor, new THREE.Color(0xffffff), flash * 0.6);
+        } else {
+          // Fade back to original color
+          obj.material.color.lerp(obj.originalColor, 0.1);
+        }
+      });
+      
+      // Torus rings - pulse outward in fear!
+      torusRings.forEach((torus, i) => {
+        // Scatter outward
+        if (scatterFear > 0.1) {
+          torus.position.z += torus.velocity;
+          torus.velocity *= 0.95;
+        } else {
+          // Return to original
+          torus.position.z += (torus.originalZ - torus.position.z) * 0.02;
+        }
+        
+        torus.rotation.x = Math.sin(time * torus.wobbleSpeed + torus.wobbleOffset) * 0.3;
+        torus.rotation.y += torus.rotationSpeed * (1 + scatterFear * 3);
+        
+        // Light up!
+        torus.material.opacity = torus.originalOpacity + glowBoost * 0.5 + Math.sin(time * 0.002 + i) * 0.1;
+      });
+      
+      // Energy beams - expand outward in fear!
+      energyBeams.forEach((beam, i) => {
+        const newAngle = beam.originalAngle + time * beam.orbitSpeed;
+        
+        // Scatter radius
+        let radius = beam.originalRadius;
+        if (scatterFear > 0.1) {
+          radius += beam.radiusVelocity;
+          beam.radiusVelocity *= 0.97;
+        } else {
+          // Return to original radius
+          beam.radiusVelocity *= 0.95;
+          radius = beam.originalRadius + beam.radiusVelocity;
+        }
+        
+        beam.position.x = Math.cos(newAngle) * radius;
+        beam.position.z = -20 + Math.sin(newAngle) * radius;
+        beam.rotation.z = newAngle;
+        
+        // Light up!
+        beam.material.opacity = beam.originalOpacity + glowBoost * 0.4 + Math.sin(time * beam.pulseSpeed + beam.pulseOffset) * 0.1;
+      });
+      
+      // Decay fear
+      if (scatterFear > 0) {
+        scatterFear *= 0.97;
+        if (scatterFear < 0.01) scatterFear = 0;
+      }
+      
+      // Update the bee! 🐝
+      updateBee(time);
+      
+      // Update lightning
+      updateLightning(time);
+    }
+    
+    function triggerLightning() {
+      // Create multiple lightning bolts from top of screen
+      const boltCount = 2 + Math.floor(Math.random() * 3); // 2-4 bolts
+      
+      for (let b = 0; b < boltCount; b++) {
+        setTimeout(() => {
+          const points = [];
+          const startX = (Math.random() - 0.5) * 80;
+          const startZ = -30 - Math.random() * 20;
+          let x = startX;
+          let y = 50;
+          let z = startZ;
+          
+          points.push(new THREE.Vector3(x, y, z));
+          
+          // Create jagged lightning path down
+          const segments = 12 + Math.floor(Math.random() * 8);
+          for (let i = 0; i < segments; i++) {
+            const progress = (i + 1) / segments;
+            y = 50 - progress * 70; // Go from top to below grid
+            x = startX + (Math.random() - 0.5) * 15 * (1 - progress * 0.5);
+            z = startZ + (Math.random() - 0.5) * 5;
+            
+            points.push(new THREE.Vector3(x, y, z));
+            
+            // Occasionally add branches
+            if (Math.random() < 0.3 && i > 2 && i < segments - 2) {
+              createLightningBranch(x, y, z);
+            }
+          }
+          
+          // Create thick lightning using TubeGeometry
+          const curve = new THREE.CatmullRomCurve3(points);
+          const tubeGeometry = new THREE.TubeGeometry(curve, points.length * 2, 0.3, 8, false);
+          const material = new THREE.MeshBasicMaterial({
+            color: 0xaaddff,
+            transparent: true,
+            opacity: 1
+          });
+          
+          const bolt = new THREE.Mesh(tubeGeometry, material);
+          bolt.life = 0.4 + Math.random() * 0.2;
+          scene.add(bolt);
+          lightningBolts.push(bolt);
+          
+          // Add bright core
+          const coreGeometry = new THREE.TubeGeometry(curve, points.length * 2, 0.12, 8, false);
+          const coreMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 1
+          });
+          const core = new THREE.Mesh(coreGeometry, coreMaterial);
+          core.life = 0.4 + Math.random() * 0.2;
+          scene.add(core);
+          lightningBolts.push(core);
+        }, b * 50);
+      }
+      
+      // Trigger grid glow and ambient light - LIGHT UP THE SKY!
+      gridGlow = 1;
+      skyFlashIntensity = 1;
+      scatterFear = 1;
+      
+      // Set lightning origin for scatter direction
+      lightningOrigin.set((Math.random() - 0.5) * 40, 50, -30);
+      
+      // Make background objects scatter in fear!
+      backgroundObjects.forEach(obj => {
+        const dir = new THREE.Vector3(
+          obj.position.x - lightningOrigin.x,
+          obj.position.y - lightningOrigin.y,
+          obj.position.z - lightningOrigin.z
+        );
+        const dist = dir.length();
+        dir.normalize();
+        // Closer objects get pushed harder
+        const force = 3 / (dist * 0.1 + 1);
+        obj.velocity.set(
+          dir.x * force * (0.5 + Math.random()),
+          dir.y * force * (0.3 + Math.random() * 0.5),
+          dir.z * force * (0.5 + Math.random())
+        );
+      });
+      
+      // Torus rings pulse outward
+      torusRings.forEach((torus, i) => {
+        torus.velocity = -2 - Math.random() * 2; // Push backward
+      });
+      
+      // Energy beams expand
+      energyBeams.forEach(beam => {
+        beam.radiusVelocity = 1 + Math.random() * 2; // Expand outward
+      });
+      
+      if (lightningAmbient) {
+        lightningAmbient.intensity = 15; // Massive flash
+        lightningAmbient.color.setHex(0xffffff); // Pure white flash
+      }
+      
+      // Play realistic thunder sound
+      if (AudioSystem.enabled && AudioSystem.ctx) {
+        const ctx = AudioSystem.ctx;
+        const now = ctx.currentTime;
+        const distance = 0.3 + Math.random() * 0.5; // Random distance factor
+        
+        // Create a convolver for reverb-like effect
+        const convolver = ctx.createConvolver();
+        const reverbLength = 3;
+        const reverbBuffer = ctx.createBuffer(2, ctx.sampleRate * reverbLength, ctx.sampleRate);
+        for (let channel = 0; channel < 2; channel++) {
+          const data = reverbBuffer.getChannelData(channel);
+          for (let i = 0; i < data.length; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 2);
+          }
+        }
+        convolver.buffer = reverbBuffer;
+        
+        // Master output with compression
+        const compressor = ctx.createDynamicsCompressor();
+        compressor.threshold.value = -20;
+        compressor.knee.value = 10;
+        compressor.ratio.value = 4;
+        compressor.connect(ctx.destination);
+        
+        // Wet/dry mix
+        const dryGain = ctx.createGain();
+        const wetGain = ctx.createGain();
+        dryGain.gain.value = 0.7;
+        wetGain.gain.value = 0.4;
+        dryGain.connect(compressor);
+        convolver.connect(wetGain);
+        wetGain.connect(compressor);
+        
+        // === INITIAL CRACK (filtered noise burst) ===
+        const crackDuration = 0.15;
+        const crackBuffer = ctx.createBuffer(1, ctx.sampleRate * crackDuration, ctx.sampleRate);
+        const crackData = crackBuffer.getChannelData(0);
+        for (let i = 0; i < crackData.length; i++) {
+          const t = i / ctx.sampleRate;
+          // Sharp attack, quick decay
+          const env = Math.exp(-t * 30) * (1 - Math.exp(-t * 500));
+          crackData[i] = (Math.random() * 2 - 1) * env;
+        }
+        const crackSource = ctx.createBufferSource();
+        crackSource.buffer = crackBuffer;
+        const crackFilter = ctx.createBiquadFilter();
+        crackFilter.type = 'bandpass';
+        crackFilter.frequency.value = 800;
+        crackFilter.Q.value = 0.5;
+        const crackGain = ctx.createGain();
+        crackGain.gain.value = 0.5 * (1 - distance * 0.5);
+        crackSource.connect(crackFilter);
+        crackFilter.connect(crackGain);
+        crackGain.connect(dryGain);
+        crackGain.connect(convolver);
+        crackSource.start(now);
+        
+        // === MAIN THUNDER BODY (brown noise with modulation) ===
+        const thunderDuration = 2.5 + Math.random();
+        const thunderBuffer = ctx.createBuffer(1, ctx.sampleRate * thunderDuration, ctx.sampleRate);
+        const thunderData = thunderBuffer.getChannelData(0);
+        let lastOut = 0;
+        for (let i = 0; i < thunderData.length; i++) {
+          const white = Math.random() * 2 - 1;
+          // Brown noise (integrated white noise)
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          const t = i / ctx.sampleRate;
+          // Envelope: quick attack, long decay with random swells
+          const baseEnv = Math.exp(-t * 1.2) * (1 - Math.exp(-t * 15));
+          const swell = 1 + 0.3 * Math.sin(t * 3) * Math.sin(t * 7);
+          thunderData[i] = lastOut * 25 * baseEnv * swell;
+        }
+        const thunderSource = ctx.createBufferSource();
+        thunderSource.buffer = thunderBuffer;
+        const thunderFilter = ctx.createBiquadFilter();
+        thunderFilter.type = 'lowpass';
+        thunderFilter.frequency.value = 200 - distance * 80;
+        thunderFilter.Q.value = 1;
+        const thunderGain = ctx.createGain();
+        thunderGain.gain.value = 0.6;
+        thunderSource.connect(thunderFilter);
+        thunderFilter.connect(thunderGain);
+        thunderGain.connect(dryGain);
+        thunderGain.connect(convolver);
+        thunderSource.start(now + 0.02);
+        
+        // === RUMBLE LAYERS (multiple low frequency oscillators) ===
+        const rumbleFreqs = [25, 35, 45, 60];
+        rumbleFreqs.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const filter = ctx.createBiquadFilter();
+          osc.type = 'sine';
+          osc.frequency.value = freq + Math.random() * 10;
+          filter.type = 'lowpass';
+          filter.frequency.value = freq * 2;
+          const delay = 0.05 + idx * 0.1;
+          const vol = 0.15 / (idx + 1);
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.linearRampToValueAtTime(vol, now + delay + 0.1);
+          gain.gain.setValueAtTime(vol, now + delay + 0.3);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 1.5 + Math.random());
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(dryGain);
+          osc.start(now + delay);
+          osc.stop(now + 2.5);
+        });
+        
+        // === ROLLING ECHOES (delayed rumbles) ===
+        const echoTimes = [0.4, 0.7, 1.1, 1.6];
+        echoTimes.forEach((echoTime, idx) => {
+          const echoDuration = 0.8 - idx * 0.15;
+          const echoBuffer = ctx.createBuffer(1, ctx.sampleRate * echoDuration, ctx.sampleRate);
+          const echoData = echoBuffer.getChannelData(0);
+          let eLastOut = 0;
+          for (let i = 0; i < echoData.length; i++) {
+            const white = Math.random() * 2 - 1;
+            eLastOut = (eLastOut + (0.02 * white)) / 1.02;
+            const t = i / ctx.sampleRate;
+            const env = Math.exp(-t * 3) * (1 - Math.exp(-t * 20));
+            echoData[i] = eLastOut * 20 * env;
+          }
+          const echoSource = ctx.createBufferSource();
+          echoSource.buffer = echoBuffer;
+          const echoFilter = ctx.createBiquadFilter();
+          echoFilter.type = 'lowpass';
+          echoFilter.frequency.value = 150 - idx * 30;
+          const echoGain = ctx.createGain();
+          echoGain.gain.value = 0.2 / (idx + 1);
+          echoSource.connect(echoFilter);
+          echoFilter.connect(echoGain);
+          echoGain.connect(dryGain);
+          echoGain.connect(convolver);
+          echoSource.start(now + echoTime);
+        });
+      }
+    }
+    
+    function createLightningBranch(startX, startY, startZ) {
+      const points = [];
+      let x = startX;
+      let y = startY;
+      let z = startZ;
+      
+      points.push(new THREE.Vector3(x, y, z));
+      
+      const segments = 4 + Math.floor(Math.random() * 4);
+      const direction = Math.random() > 0.5 ? 1 : -1;
+      
+      for (let i = 0; i < segments; i++) {
+        x += direction * (2 + Math.random() * 3);
+        y -= 2 + Math.random() * 2;
+        z += (Math.random() - 0.5) * 2;
+        points.push(new THREE.Vector3(x, y, z));
+      }
+      
+      // Create thick branch using TubeGeometry
+      const curve = new THREE.CatmullRomCurve3(points);
+      const tubeGeometry = new THREE.TubeGeometry(curve, points.length * 2, 0.15, 6, false);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0xaaddff,
+        transparent: true,
+        opacity: 0.8
+      });
+      
+      const branch = new THREE.Mesh(tubeGeometry, material);
+      branch.life = 0.3 + Math.random() * 0.1;
+      scene.add(branch);
+      lightningBolts.push(branch);
+    }
+    
+    function updateLightning(time) {
+      // Check if it's time for random lightning
+      const lightningInterval = sandboxMode ? 8000 : 60000;  // 60 seconds minimum
+      const lightningVariance = sandboxMode ? 7000 : 60000;  // Up to 120 seconds total
+      
+      if (time > nextLightningTime) {
+        triggerLightning();
+        nextLightningTime = time + lightningInterval + Math.random() * lightningVariance;
+      }
+      
+      // Update existing lightning bolts
+      for (let i = lightningBolts.length - 1; i >= 0; i--) {
+        const bolt = lightningBolts[i];
+        bolt.life -= 0.03;
+        bolt.material.opacity = bolt.life * 2;
+        
+        if (bolt.life <= 0) {
+          scene.remove(bolt);
+          lightningBolts.splice(i, 1);
+        }
+      }
+      
+      // Update grid glow and ambient light
+      if (gridGlow > 0) {
+        gridGlow -= 0.02;
+        
+        // Fade ambient lightning light
+        if (lightningAmbient) {
+          lightningAmbient.intensity = gridGlow * 15;
+          // Transition from white back to cyan
+          const whiteness = Math.max(0, gridGlow * 2 - 1);
+          lightningAmbient.color.setRGB(
+            0.67 + whiteness * 0.33,
+            0.87 + whiteness * 0.13,
+            1
+          );
+        }
+        
+        // Update sky dome flash - LIGHT UP THE SKY!
+        if (skyDome && skyDome.material) {
+          const flashPower = Math.pow(skyFlashIntensity, 0.5); // Slower fade
+          skyDome.material.opacity = flashPower * 0.4;
+          // Flash color transitions from white to blue
+          const r = 0.3 + skyFlashIntensity * 0.7;
+          const g = 0.5 + skyFlashIntensity * 0.5;
+          const b = 1;
+          skyDome.material.color.setRGB(r, g, b);
+        }
+        skyFlashIntensity *= 0.92; // Fade the flash
+        
+        if (gridHelper && gridHelper.material) {
+          // Make grid glow bright cyan/white during lightning
+          const glowIntensity = gridGlow;
+          const r = 0 + glowIntensity * 1;
+          const g = 0.4 + glowIntensity * 0.6;
+          const b = 1;
+          
+          if (Array.isArray(gridHelper.material)) {
+            gridHelper.material.forEach(mat => {
+              mat.color.setRGB(r, g, b);
+              mat.opacity = 0.5 + glowIntensity * 0.5;
+            });
+          } else {
+            gridHelper.material.color.setRGB(r, g, b);
+            gridHelper.material.opacity = 0.5 + glowIntensity * 0.5;
+          }
+        }
+      } else {
+        // Reset ambient light
+        if (lightningAmbient) {
+          lightningAmbient.intensity = 0;
+        }
+        
+        // Reset sky dome
+        if (skyDome && skyDome.material) {
+          skyDome.material.opacity = 0;
+        }
+        skyFlashIntensity = 0;
+        
+        // Reset grid to normal colors
+        if (gridHelper && gridHelper.material) {
+          if (Array.isArray(gridHelper.material)) {
+            gridHelper.material[0].color.setHex(0x0066ff);
+            gridHelper.material[1].color.setHex(0x003366);
+            gridHelper.material.forEach(mat => mat.opacity = 1);
+          }
+        }
+      }
+    }
+    
+    function createBlock(x, y, color, isGhost = false) {
+      const geometry = new THREE.BoxGeometry(BLOCK_SIZE * 0.9, BLOCK_SIZE * 0.9, BLOCK_SIZE * 0.9);
+      
+      let material;
+      if (isGhost) {
+        material = new THREE.MeshBasicMaterial({ 
+          color: color,
+          transparent: true,
+          opacity: 0.2,
+          wireframe: true
+        });
+      } else {
+        material = new THREE.MeshStandardMaterial({ 
+          color: color,
+          metalness: 0.3,
+          roughness: 0.4,
+          emissive: color,
+          emissiveIntensity: 0.3
+        });
+      }
+      
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(
+        BOARD_OFFSET_X + x + 0.5,
+        BOARD_OFFSET_Y + y + 0.5,
+        0
+      );
+      
+      if (!isGhost) {
+        // Add glowing edges
+        const edgeGeometry = new THREE.EdgesGeometry(geometry);
+        const edgeMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 });
+        const edges = new THREE.LineSegments(edgeGeometry, edgeMaterial);
+        mesh.add(edges);
+      }
+      
+      return mesh;
+    }
+    
+    function initBoard() {
+      board = Array(ROWS).fill(null).map(() => Array(COLS).fill(null));
+      
+      // Clear existing meshes
+      boardMeshes.forEach(m => scene.remove(m.mesh));
+      boardMeshes = [];
+      currentPieceMeshes.forEach(mesh => scene.remove(mesh));
+      currentPieceMeshes = [];
+      
+      // Clear particles
+      particles.forEach(p => scene.remove(p));
+      particles = [];
+    }
+    
+    function getRandomPiece() {
+      let key;
+      if (sandboxMode && selectedPieceType) {
+        key = selectedPieceType;
+      } else {
+        const keys = Object.keys(PIECES);
+        key = keys[Math.floor(Math.random() * keys.length)];
+      }
+      return {
+        type: key,
+        shape: PIECES[key].shape.map(row => [...row]),
+        color: PIECES[key].color,
+        x: Math.floor(COLS / 2) - Math.ceil(PIECES[key].shape[0].length / 2),
+        y: ROWS - 1
+      };
+    }
+    
+    function spawnPiece() {
+      currentPiece = nextPiece || getRandomPiece();
+      currentPiece.x = Math.floor(COLS / 2) - Math.ceil(currentPiece.shape[0].length / 2);
+      currentPiece.y = ROWS - currentPiece.shape.length;
+      nextPiece = getRandomPiece();
+      
+      if (!isValidPosition(currentPiece)) {
+        endGame();
+        return;
+      }
+      
+      updateCurrentPieceMeshes();
+      drawNextPiece();
+    }
+    
+    function isValidPosition(piece, offsetX = 0, offsetY = 0, shape = piece.shape) {
+      for (let r = 0; r < shape.length; r++) {
+        for (let c = 0; c < shape[r].length; c++) {
+          if (shape[r][c]) {
+            const newX = piece.x + c + offsetX;
+            const newY = piece.y - r + offsetY;
+            if (newX < 0 || newX >= COLS || newY < 0) return false;
+            if (newY < ROWS && board[newY][newX]) return false;
+          }
+        }
+      }
+      return true;
+    }
+    
+    function rotate(shape) {
+      const rows = shape.length;
+      const cols = shape[0].length;
+      const rotated = Array(cols).fill(null).map(() => Array(rows).fill(0));
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          rotated[c][rows - 1 - r] = shape[r][c];
+        }
+      }
+      return rotated;
+    }
+    
+    function rotatePiece() {
+      const rotated = rotate(currentPiece.shape);
+      const kicks = [0, -1, 1, -2, 2];
+      for (let kick of kicks) {
+        if (isValidPosition(currentPiece, kick, 0, rotated)) {
+          currentPiece.shape = rotated;
+          currentPiece.x += kick;
+          updateCurrentPieceMeshes();
+          // Camera effect
+          targetCameraAngle += 0.05;
+          AudioSystem.rotate();
+          return;
+        }
+      }
+    }
+    
+    function moveHorizontal(dir) {
+      if (isValidPosition(currentPiece, dir, 0)) {
+        currentPiece.x += dir;
+        updateCurrentPieceMeshes();
+        AudioSystem.move();
+      }
+    }
+    
+    function moveDown() {
+      if (isValidPosition(currentPiece, 0, -1)) {
+        currentPiece.y--;
+        updateCurrentPieceMeshes();
+        AudioSystem.drop();
+        return true;
+      }
+      lockPiece();
+      return false;
+    }
+    
+    function hardDrop() {
+      let dropDistance = 0;
+      while (isValidPosition(currentPiece, 0, -1)) {
+        currentPiece.y--;
+        dropDistance++;
+      }
+      score += dropDistance * 2;
+      updateScore();
+      AudioSystem.hardDrop();
+      lockPiece();
+      
+      // Camera shake
+      targetCameraAngle += 0.1;
+    }
+    
+    function getGhostY() {
+      let ghostY = currentPiece.y;
+      while (isValidPosition(currentPiece, 0, ghostY - currentPiece.y - 1)) {
+        ghostY--;
+      }
+      return ghostY;
+    }
+    
+    function lockPiece() {
+      for (let r = 0; r < currentPiece.shape.length; r++) {
+        for (let c = 0; c < currentPiece.shape[r].length; c++) {
+          if (currentPiece.shape[r][c]) {
+            const y = currentPiece.y - r;
+            const x = currentPiece.x + c;
+            if (y >= 0 && y < ROWS) {
+              board[y][x] = currentPiece.color;
+              
+              // Add to scene
+              const mesh = createBlock(x, y, currentPiece.color);
+              scene.add(mesh);
+              boardMeshes.push({ mesh, x, y });
+            }
+          }
+        }
+      }
+      
+      // Clear meshes
+      currentPieceMeshes.forEach(mesh => scene.remove(mesh));
+      currentPieceMeshes = [];
+      
+      AudioSystem.lock();
+      clearLines();
+      spawnPiece();
+    }
+    
+    function clearLines() {
+      let cleared = 0;
+      
+      for (let r = 0; r < ROWS; r++) {
+        if (board[r].every(cell => cell !== null)) {
+          // Get the blocks being cleared for disintegration effect
+          const rowBlocks = boardMeshes.filter(m => m.y === r);
+          
+          // Create disintegration effect from actual blocks
+          createBlockDisintegration(rowBlocks, cleared);
+          
+          // Remove from board
+          board.splice(r, 1);
+          board.push(Array(COLS).fill(null));
+          
+          // Remove meshes
+          rowBlocks.forEach(m => {
+            scene.remove(m.mesh);
+          });
+          boardMeshes = boardMeshes.filter(m => m.y !== r);
+          
+          // Move meshes above down
+          boardMeshes.forEach(m => {
+            if (m.y > r) {
+              m.y--;
+              m.mesh.position.y = BOARD_OFFSET_Y + m.y + 0.5;
+            }
+          });
+          
+          cleared++;
+          r--; // Check this row again
+        }
+      }
+      
+      if (cleared > 0) {
+        const points = [0, 100, 300, 500, 800][cleared] * level;
+        score += points;
+        lines += cleared;
+        
+        const prevLevel = level;
+        level = Math.floor(lines / 10) + 1;
+        dropInterval = Math.max(100, 1000 - (level - 1) * 80);
+        
+        updateScore();
+        showCombo(cleared);
+        
+        // Sound effects
+        if (cleared === 4) {
+          AudioSystem.tetris();
+          // TETRIS! Trigger epic lightning storm!
+          triggerLightning();
+          setTimeout(() => triggerLightning(), 300);
+        } else {
+          AudioSystem.clearLine(cleared);
+          // Trigger lightning on any line clear
+          if (cleared >= 2) {
+            triggerLightning();
+          }
+        }
+        
+        if (level > prevLevel) {
+          AudioSystem.levelUp();
+        }
+        
+        // Camera shake scales with lines cleared
+        targetCameraAngle += cleared * 0.08;
+      }
+    }
+    
+    function createBlockDisintegration(rowBlocks, totalLinesCleared) {
+      // Each block breaks into smaller cubes
+      const fragmentsPerBlock = 4 + totalLinesCleared * 2; // More fragments for more lines
+      const intensity = 0.15 + totalLinesCleared * 0.08; // Explosion force
+      
+      rowBlocks.forEach(block => {
+        const blockColor = block.mesh.material.color.getHex();
+        const blockPos = block.mesh.position.clone();
+        
+        for (let i = 0; i < fragmentsPerBlock; i++) {
+          // Random size for variety
+          const size = 0.1 + Math.random() * 0.2;
+          const geometry = new THREE.BoxGeometry(size, size, size);
+          
+          // Use the original block's color
+          const material = new THREE.MeshStandardMaterial({
+            color: blockColor,
+            emissive: blockColor,
+            emissiveIntensity: 0.5,
+            metalness: 0.3,
+            roughness: 0.4,
+            transparent: true
+          });
+          
+          const fragment = new THREE.Mesh(geometry, material);
+          
+          // Start from random position within the block
+          fragment.position.set(
+            blockPos.x + (Math.random() - 0.5) * 0.8,
+            blockPos.y + (Math.random() - 0.5) * 0.8,
+            blockPos.z + (Math.random() - 0.5) * 0.8
+          );
+          
+          // Velocity - explode outward and upward, more for TETRIS
+          fragment.velocity = new THREE.Vector3(
+            (Math.random() - 0.5) * intensity * 2,
+            Math.random() * intensity + 0.05,
+            (Math.random() - 0.5) * intensity + 0.1 // Slight forward bias
+          );
+          
+          // Rotation speed
+          fragment.rotSpeed = {
+            x: (Math.random() - 0.5) * 0.3,
+            y: (Math.random() - 0.5) * 0.3,
+            z: (Math.random() - 0.5) * 0.3
+          };
+          
+          fragment.life = 1.2 + Math.random() * 0.5;
+          fragment.isFragment = true;
+          fragment.shrinkRate = 0.015 + totalLinesCleared * 0.003;
+          
+          scene.add(fragment);
+          particles.push(fragment);
+        }
+      });
+      
+      // For TETRIS, add extra dramatic trailing particles from each block
+      if (totalLinesCleared === 4) {
+        rowBlocks.forEach(block => {
+          const blockColor = block.mesh.material.color.getHex();
+          const blockPos = block.mesh.position.clone();
+          
+          // Trailing sparkles
+          for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+              const size = 0.05 + Math.random() * 0.1;
+              const geometry = new THREE.BoxGeometry(size, size, size);
+              const material = new THREE.MeshBasicMaterial({
+                color: blockColor,
+                transparent: true
+              });
+              
+              const sparkle = new THREE.Mesh(geometry, material);
+              sparkle.position.copy(blockPos);
+              sparkle.position.x += (Math.random() - 0.5) * 0.5;
+              sparkle.position.y += (Math.random() - 0.5) * 0.5;
+              
+              sparkle.velocity = new THREE.Vector3(
+                (Math.random() - 0.5) * 0.1,
+                Math.random() * 0.2,
+                Math.random() * 0.15
+              );
+              
+              sparkle.life = 0.8;
+              sparkle.rotSpeed = { x: 0.2, y: 0.2, z: 0.2 };
+              sparkle.isFragment = true;
+              sparkle.shrinkRate = 0.025;
+              
+              scene.add(sparkle);
+              particles.push(sparkle);
+            }, i * 30);
+          }
+        });
+      }
+    }
+    
+    function updateParticles() {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        
+        if (p.isFragment) {
+          // Block fragment - tumbles and shrinks as it falls
+          p.position.add(p.velocity);
+          p.velocity.y -= 0.008; // Gravity
+          p.velocity.multiplyScalar(0.99); // Air resistance
+          
+          // Tumble
+          p.rotation.x += p.rotSpeed.x;
+          p.rotation.y += p.rotSpeed.y;
+          p.rotation.z += p.rotSpeed.z;
+          
+          // Shrink over time
+          p.life -= p.shrinkRate;
+          const scale = Math.max(0, p.life);
+          p.scale.set(scale, scale, scale);
+          
+          // Fade out
+          if (p.material.opacity !== undefined) {
+            p.material.opacity = Math.min(1, p.life * 1.5);
+          }
+        } else {
+          // Legacy particle handling
+          p.position.add(p.velocity);
+          p.velocity.y -= 0.01;
+          p.life -= 0.02;
+          p.material.opacity = Math.min(p.life, 1);
+          p.rotation.x += 0.1;
+          p.rotation.y += 0.1;
+        }
+        
+        if (p.life <= 0) {
+          scene.remove(p);
+          particles.splice(i, 1);
+        }
+      }
+      
+      // Update shockwaves (kept minimal, just for cleanup)
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        const s = shockwaves[i];
+        s.scale.x += s.expandSpeed;
+        s.scale.y += s.expandSpeed;
+        s.scale.z += s.expandSpeed * 0.5;
+        s.life -= 0.03;
+        s.material.opacity = s.life * 0.8;
+        
+        if (s.life <= 0) {
+          scene.remove(s);
+          shockwaves.splice(i, 1);
+        }
+      }
+    }
+    
+    function updateCurrentPieceMeshes() {
+      // Clear existing
+      currentPieceMeshes.forEach(mesh => scene.remove(mesh));
+      currentPieceMeshes = [];
+      
+      // Ghost piece
+      const ghostY = getGhostY();
+      
+      for (let r = 0; r < currentPiece.shape.length; r++) {
+        for (let c = 0; c < currentPiece.shape[r].length; c++) {
+          if (currentPiece.shape[r][c]) {
+            // Ghost
+            const ghostMesh = createBlock(
+              currentPiece.x + c,
+              ghostY - r,
+              currentPiece.color,
+              true
+            );
+            scene.add(ghostMesh);
+            currentPieceMeshes.push(ghostMesh);
+            
+            // Actual piece
+            const mesh = createBlock(
+              currentPiece.x + c,
+              currentPiece.y - r,
+              currentPiece.color
+            );
+            scene.add(mesh);
+            currentPieceMeshes.push(mesh);
+          }
+        }
+      }
+    }
+    
+    function drawNextPiece() {
+      const canvas = document.getElementById('next-canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const shape = nextPiece.shape;
+      const color = '#' + nextPiece.color.toString(16).padStart(6, '0');
+      const blockSize = 20;
+      const offsetX = (canvas.width - shape[0].length * blockSize) / 2;
+      const offsetY = (canvas.height - shape.length * blockSize) / 2;
+      
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 15;
+      
+      for (let r = 0; r < shape.length; r++) {
+        for (let c = 0; c < shape[r].length; c++) {
+          if (shape[r][c]) {
+            ctx.fillStyle = color;
+            ctx.fillRect(
+              offsetX + c * blockSize + 2,
+              offsetY + r * blockSize + 2,
+              blockSize - 4,
+              blockSize - 4
+            );
+          }
+        }
+      }
+    }
+    
+    function updateScore() {
+      document.getElementById('score').textContent = score.toLocaleString();
+      document.getElementById('level').textContent = level;
+      document.getElementById('lines').textContent = lines;
+    }
+    
+    function showCombo(linesCleared) {
+      const messages = ['', 'SINGLE!', 'DOUBLE!', 'TRIPLE!', 'TETRIS!!!'];
+      const combo = document.getElementById('combo');
+      combo.textContent = messages[linesCleared];
+      combo.className = 'show';
+      setTimeout(() => combo.className = '', 1000);
+    }
+    
+    function endGame() {
+      gameState = 'gameover';
+      // Don't save high scores in sandbox mode
+      if (!sandboxMode) {
+        saveHighScore(score);
+      }
+      document.getElementById('final-score').textContent = score.toLocaleString();
+      document.getElementById('game-over').classList.add('active');
+      document.getElementById('piece-selector').classList.remove('active');
+      AudioSystem.gameOver();
+    }
+    
+    function startGame(sandbox = false) {
+      document.getElementById('start-screen').classList.add('hidden');
+      sandboxMode = sandbox;
+      selectedPieceType = null;
+      
+      // Show/hide sandbox UI
+      document.getElementById('piece-selector').classList.toggle('active', sandbox);
+      document.getElementById('sandbox-label').classList.toggle('active', sandbox);
+      document.getElementById('lightning-btn').classList.toggle('active', sandbox);
+      
+      AudioSystem.init();
+      AudioSystem.resume();
+      AudioSystem.gameStart();
+      resetGame();
+    }
+    
+    function selectPiece(type) {
+      selectedPieceType = type;
+      // Visual feedback
+      document.querySelectorAll('.piece-btn').forEach(btn => {
+        btn.style.transform = btn.classList.contains(type) ? 'scale(1.2)' : 'scale(1)';
+        btn.style.boxShadow = btn.classList.contains(type) ? '0 0 20px currentColor' : 'none';
+      });
+    }
+    
+    function resetGame() {
+      score = 0;
+      level = 1;
+      lines = 0;
+      dropInterval = 1000;
+      gameState = 'playing';
+      
+      initBoard();
+      updateScore();
+      spawnPiece();
+      
+      document.getElementById('game-over').classList.remove('active');
+      lastDrop = performance.now();
+    }
+    
+    function restartGame() {
+      AudioSystem.resume();
+      AudioSystem.gameStart();
+      // Keep sandbox mode state
+      document.getElementById('piece-selector').classList.toggle('active', sandboxMode);
+      document.getElementById('sandbox-label').classList.toggle('active', sandboxMode);
+      document.getElementById('lightning-btn').classList.toggle('active', sandboxMode);
+      resetGame();
+    }
+    
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // Input handling
+    document.addEventListener('keydown', (e) => {
+      if (gameState !== 'playing') return;
+      
+      switch (e.code) {
+        case 'ArrowLeft':
+        case 'KeyA':
+          e.preventDefault();
+          moveHorizontal(-1);
+          break;
+        case 'ArrowRight':
+        case 'KeyD':
+          e.preventDefault();
+          moveHorizontal(1);
+          break;
+        case 'ArrowDown':
+        case 'KeyS':
+          e.preventDefault();
+          moveDown();
+          score += 1;
+          updateScore();
+          break;
+        case 'ArrowUp':
+        case 'KeyW':
+          e.preventDefault();
+          rotatePiece();
+          break;
+        case 'Space':
+          e.preventDefault();
+          hardDrop();
+          break;
+        case 'KeyP':
+        case 'Escape':
+          e.preventDefault();
+          togglePause();
+          break;
+      }
+    });
+    
+    // Animation loop
+    function animate(time) {
+      requestAnimationFrame(animate);
+      
+      // Game logic
+      if (gameState === 'playing' && currentPiece) {
+        if (time - lastDrop > dropInterval) {
+          moveDown();
+          lastDrop = time;
+        }
+      }
+      
+      // Camera animation
+      cameraAngle += (targetCameraAngle - cameraAngle) * 0.05;
+      targetCameraAngle *= 0.98;
+      
+      const baseX = Math.sin(time * 0.0002) * 3;
+      const baseY = Math.cos(time * 0.0001) * 2 + 5;
+      camera.position.x = baseX + Math.sin(cameraAngle) * 2;
+      camera.position.y = baseY + Math.cos(cameraAngle) * 1;
+      camera.lookAt(0, 0, 0);
+      
+      // Update particles
+      updateParticles();
+      
+      // Update background effects
+      updateBackgroundEffects(time);
+      
+      // Rotate blocks slightly for visual effect
+      boardMeshes.forEach(m => {
+        m.mesh.rotation.x = Math.sin(time * 0.001 + m.x) * 0.02;
+        m.mesh.rotation.y = Math.cos(time * 0.001 + m.y) * 0.02;
+      });
+      
+      currentPieceMeshes.forEach((mesh, i) => {
+        if (!mesh.material.wireframe) {
+          mesh.rotation.x = Math.sin(time * 0.002) * 0.05;
+          mesh.rotation.y = Math.cos(time * 0.002) * 0.05;
+          mesh.position.z = Math.sin(time * 0.003 + i) * 0.1;
+        }
+      });
+      
+      renderer.render(scene, camera);
+    }
+    
+    // Initialize
+    initScene();
+    updateHighScoreDisplay();
+    animate(0);
+    
+    // ============================================
+    // MOBILE TOUCH CONTROLS
+    // ============================================
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                     || ('ontouchstart' in window) 
+                     || (navigator.maxTouchPoints > 0);
+    
+    // Show touch controls on mobile
+    if (isMobile) {
+      document.getElementById('touch-controls').classList.add('active');
+      
+      // Prevent context menu on long press
+      document.addEventListener('contextmenu', e => e.preventDefault());
+    }
+    
+    // Touch button handlers with repeat functionality
+    function setupTouchButton(id, action, repeatable = false) {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      
+      let repeatInterval = null;
+      let isPressed = false;
+      
+      const startAction = (e) => {
+        e.preventDefault();
+        if (gameState !== 'playing') return;
+        
+        isPressed = true;
+        action();
+        
+        if (repeatable) {
+          // Start repeating after initial delay
+          repeatInterval = setTimeout(() => {
+            repeatInterval = setInterval(() => {
+              if (isPressed && gameState === 'playing') {
+                action();
+              }
+            }, 80); // Repeat every 80ms
+          }, 200); // Initial delay 200ms
+        }
+      };
+      
+      const stopAction = (e) => {
+        e.preventDefault();
+        isPressed = false;
+        if (repeatInterval) {
+          clearInterval(repeatInterval);
+          clearTimeout(repeatInterval);
+          repeatInterval = null;
+        }
+      };
+      
+      btn.addEventListener('touchstart', startAction, { passive: false });
+      btn.addEventListener('touchend', stopAction, { passive: false });
+      btn.addEventListener('touchcancel', stopAction, { passive: false });
+      
+      // Also support mouse for testing on desktop
+      btn.addEventListener('mousedown', startAction);
+      btn.addEventListener('mouseup', stopAction);
+      btn.addEventListener('mouseleave', stopAction);
+    }
+    
+    // Set up all touch buttons
+    setupTouchButton('touch-left', () => moveHorizontal(-1), true);
+    setupTouchButton('touch-right', () => moveHorizontal(1), true);
+    setupTouchButton('touch-down', () => {
+      moveDown();
+      score += 1;
+      updateScore();
+    }, true);
+    setupTouchButton('touch-rotate', () => rotatePiece(), false);
+    setupTouchButton('touch-drop', () => hardDrop(), false);
+    
+    // Swipe gesture support
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    const SWIPE_THRESHOLD = 50;
+    const SWIPE_TIME_THRESHOLD = 300;
+    
+    document.addEventListener('touchstart', (e) => {
+      // Ignore if touching a button
+      if (e.target.closest('button') || e.target.closest('#touch-controls')) return;
+      
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+      if (gameState !== 'playing') return;
+      if (e.target.closest('button') || e.target.closest('#touch-controls')) return;
+      
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchEndTime = Date.now();
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      const deltaTime = touchEndTime - touchStartTime;
+      
+      // Only process quick swipes
+      if (deltaTime > SWIPE_TIME_THRESHOLD) return;
+      
+      const absDeltaX = Math.abs(deltaX);
+      const absDeltaY = Math.abs(deltaY);
+      
+      if (absDeltaX > SWIPE_THRESHOLD && absDeltaX > absDeltaY) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+          moveHorizontal(1); // Swipe right
+        } else {
+          moveHorizontal(-1); // Swipe left
+        }
+      } else if (absDeltaY > SWIPE_THRESHOLD && absDeltaY > absDeltaX) {
+        // Vertical swipe
+        if (deltaY > 0) {
+          // Swipe down - soft drop several rows
+          for (let i = 0; i < 3; i++) {
+            moveDown();
+            score += 1;
+          }
+          updateScore();
+        } else {
+          // Swipe up - rotate
+          rotatePiece();
+        }
+      }
+    }, { passive: true });
+    
+    // Tap to rotate (on the game area, not buttons)
+    document.addEventListener('touchend', (e) => {
+      if (gameState !== 'playing') return;
+      if (e.target.closest('button') || e.target.closest('#touch-controls') || e.target.closest('#ui') || e.target.closest('#next-piece')) return;
+      
+      const touchEndTime = Date.now();
+      const deltaTime = touchEndTime - touchStartTime;
+      
+      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      
+      // Quick tap with minimal movement = rotate
+      if (deltaTime < 200 && deltaX < 20 && deltaY < 20) {
+        rotatePiece();
+      }
+    }, { passive: true });
+    
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd < 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, { passive: false });    
+    // Expose functions globally for inline onclick handlers
+    window.startGame = startGame;
+    window.restartGame = restartGame;
+    window.togglePause = togglePause;
+    window.toggleVolume = toggleVolume;
+    window.selectPiece = selectPiece;
+    window.triggerLightning = triggerLightning;
+  </script>
+</body>
+</html>
